@@ -1,7 +1,10 @@
 html, body { margin: 0; padding: 0; background: var(--ecru); }
+html { scroll-behavior: smooth; }
 #root { overflow-x: hidden; }
 *, *::before, *::after { box-sizing: border-box; }
-body { font-family: var(--font-body); }
+body { font-family: var(--font-body); animation: page-in 700ms var(--ease) both; }
+
+@keyframes page-in { from { opacity: 0; } to { opacity: 1; } }
 
 a { color: var(--camel); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
 a:hover { text-decoration-thickness: 2px; color: var(--camel); }
@@ -11,11 +14,61 @@ button, input, select { font: inherit; }
 
 img { max-width: 100%; display: block; }
 
-/* scroll reveal — story sections only, never commerce zones */
-[data-reveal] { opacity: 0; transform: translateY(12px); transition: opacity 500ms var(--ease), transform 500ms var(--ease); }
+/* scroll reveal — story sections only, never commerce zones. Delay is set
+   per-element via the --reveal-delay custom property for staggered groups. */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(20px) scale(0.985);
+  transition: opacity 700ms var(--ease), transform 700ms var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
+}
 [data-reveal="in"] { opacity: 1; transform: none; }
+
+/* animated underline sweep — used for nav links and text links that want
+   more presence than the default underline-thickness change */
+[data-underline] { position: relative; text-decoration: none !important; }
+[data-underline]::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 100%; bottom: -2px;
+  height: 1px;
+  background: currentColor;
+  transition: right 280ms var(--ease);
+}
+[data-underline]:hover::after, [data-underline]:focus-visible::after { right: 0; }
+
+/* buttons: lift on hover/focus, press back down on click — no shadow added,
+   just a small translate so it reads as responsive rather than flat-dead */
+[data-btn] { transition: transform 200ms var(--ease), background-color 200ms var(--ease), color 200ms var(--ease), border-color 200ms var(--ease); }
+[data-btn]:hover { transform: translateY(-2px); }
+[data-btn]:active { transform: translateY(0); }
+
+/* image layers used for hover-zoom (product cards, category tiles) */
+[data-zoom-layer] { transition: transform 500ms var(--ease); }
+[data-zoom-parent]:hover [data-zoom-layer] { transform: scale(1.045); }
+
+/* whole-card lift on hover (product cards) */
+[data-card] { transition: transform 250ms var(--ease); }
+[data-card]:hover { transform: translateY(-4px); }
+
+/* subtle parallax drift on story imagery — position set via JS as the
+   section scrolls, disabled entirely under reduced motion below */
+[data-parallax] { transition: background-position 100ms linear; will-change: background-position; }
+
+/* one-time staggered entrance for above-the-fold hero copy (mount, not scroll) */
+@keyframes hero-rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+[data-hero-in] { opacity: 0; animation: hero-rise 700ms var(--ease) both; animation-delay: var(--hero-delay, 0ms); }
+
 @media (prefers-reduced-motion: reduce) {
+  body { animation: none; }
   [data-reveal] { opacity: 1; transform: none; transition: none; }
+  [data-underline]::after { transition: none; }
+  [data-btn] { transition: background-color 200ms var(--ease), color 200ms var(--ease); }
+  [data-btn]:hover { transform: none; }
+  [data-zoom-parent]:hover [data-zoom-layer] { transform: none; }
+  [data-card]:hover { transform: none; }
+  [data-parallax] { background-position: center !important; }
+  [data-hero-in] { animation: none; opacity: 1; }
 }
 
 [data-mobile-only] { display: none; }

@@ -6,15 +6,16 @@ function CategoryTile({ name, descriptor, background }) {
   return (
     <a
       href="#collection"
+      data-zoom-parent="1"
       style={{
         position: 'relative',
         display: 'block',
         aspectRatio: '3/4',
         overflow: 'hidden',
         textDecoration: 'none',
-        background,
       }}
     >
+      <div data-zoom-layer="1" style={{ position: 'absolute', inset: 0, background }} />
       <div
         style={{
           position: 'absolute',
@@ -41,8 +42,10 @@ function CategoryTile({ name, descriptor, background }) {
   );
 }
 
-// Commerce zone: dense, plain, no reveal animation — the surface lift to ivory
-// is the only signal the visitor has moved from reading to shopping.
+// Commerce zone: dense, plain, no entrance-reveal animation — the surface
+// lift to ivory is the signal the visitor has moved from reading to
+// shopping. Hover-only interaction feedback (image zoom) is fine here;
+// scroll-triggered reveals are not (a grid that fades in reads as unreliable).
 export default function CategoryTiles() {
   const { t } = useLanguage();
   return (
@@ -63,16 +66,7 @@ export default function CategoryTiles() {
         >
           {t.tiles.heading}
         </h2>
-        <a
-          href="#collection"
-          style={{
-            color: 'var(--camel)',
-            fontFamily: 'var(--font-body)',
-            fontWeight: 500,
-            textDecorationThickness: '1px',
-            textUnderlineOffset: '4px',
-          }}
-        >
+        <a href="#collection" data-underline="1" style={{ color: 'var(--camel)', fontFamily: 'var(--font-body)', fontWeight: 500 }}>
           {t.tiles.viewAll}
         </a>
       </div>

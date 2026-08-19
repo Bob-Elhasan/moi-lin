@@ -19,6 +19,8 @@ export default function StoryInstinct() {
       }}
     >
       <Reveal
+        parallax
+        parallaxRange={10}
         style={{
           aspectRatio: '3/4',
           backgroundImage: 'url(assets/images/instinct.jpg)',

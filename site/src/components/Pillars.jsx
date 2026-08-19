@@ -22,10 +22,11 @@ export default function Pillars() {
       >
         {t.pillars.heading}
       </Reveal>
-      <Reveal data-cols3="1" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 0 }}>
+      <div data-cols3="1" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 0 }}>
         {items.map((p, i) => (
-          <div
+          <Reveal
             key={p.title}
+            delay={i * 130}
             style={{
               padding: i === 0 ? '0 40px 0 0' : i === items.length - 1 ? '0 0 0 40px' : '0 40px',
               borderRight: i < items.length - 1 ? '1px solid var(--line)' : 'none',
@@ -48,9 +49,9 @@ export default function Pillars() {
             <p style={{ fontFamily: 'var(--font-body)', fontSize: 15, lineHeight: 1.6, color: 'var(--chocolate)', margin: 0, textWrap: 'pretty' }}>
               {p.body}
             </p>
-          </div>
+          </Reveal>
         ))}
-      </Reveal>
+      </div>
     </section>
   );
 }

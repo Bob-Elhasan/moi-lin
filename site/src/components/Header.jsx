@@ -47,7 +47,7 @@ export default function Header({ condensed }) {
           aria-label="Categories"
         >
           {t.nav.categories.map((c) => (
-            <a key={c} href="#collection" style={{ color: 'var(--chocolate)', textDecoration: 'none' }}>
+            <a key={c} href="#collection" data-underline="1" style={{ color: 'var(--chocolate)' }}>
               {c}
             </a>
           ))}
@@ -71,20 +71,24 @@ export default function Header({ condensed }) {
             textTransform: 'uppercase',
             padding: '10px 14px',
             cursor: 'pointer',
+            transition: 'background-color 200ms var(--ease)',
           }}
         >
           {t.nav.menu}
         </button>
 
-        <a href="#top" style={{ justifySelf: 'center', textDecoration: 'none' }}>
+        <a href="#top" style={{ justifySelf: 'center', textDecoration: 'none', transition: 'transform 200ms var(--ease)' }}
+           onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.04)')}
+           onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+        >
           <img src="assets/logos/Logo-Dark.png" alt="MOi & LiN" style={{ height: 40, width: 'auto', display: 'block' }} />
         </a>
 
         <div style={{ display: 'flex', gap: 24, alignItems: 'center', justifySelf: 'end' }}>
           <div style={{ display: 'flex', gap: 20, fontSize: 13, fontWeight: 500, color: 'var(--chocolate)' }}>
-            <button type="button" style={btnReset}>{t.nav.search}</button>
-            <button data-desktop-only="1" type="button" style={btnReset}>{t.nav.account}</button>
-            <button type="button" style={btnReset}>{t.nav.bag(0)}</button>
+            <button type="button" data-underline="1" style={btnReset}>{t.nav.search}</button>
+            <button data-desktop-only="1" type="button" data-underline="1" style={btnReset}>{t.nav.account}</button>
+            <button type="button" data-underline="1" style={btnReset}>{t.nav.bag(0)}</button>
           </div>
           <div data-desktop-only="1" style={{ paddingLeft: 20, borderLeft: '1px solid var(--line)' }}>
             <LanguageSwitcher variant="light" />
@@ -92,58 +96,72 @@ export default function Header({ condensed }) {
         </div>
       </div>
 
-      {menuOpen && (
-        <div
-          style={{
-            position: 'fixed',
-            inset: 0,
-            zIndex: 80,
-            background: 'var(--ecru)',
-            padding: 24,
-            fontFamily: 'var(--font-body)',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 24,
-          }}
+      <div
+        aria-hidden={!menuOpen}
+        style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 80,
+          background: 'var(--ecru)',
+          padding: 24,
+          fontFamily: 'var(--font-body)',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 24,
+          opacity: menuOpen ? 1 : 0,
+          transform: menuOpen ? 'translateY(0)' : 'translateY(-12px)',
+          pointerEvents: menuOpen ? 'auto' : 'none',
+          transition: 'opacity 300ms var(--ease), transform 300ms var(--ease)',
+        }}
+      >
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <img src="assets/logos/Logo-Dark.png" alt="MOi & LiN" style={{ height: 22 }} />
+          <button
+            type="button"
+            onClick={toggleMenu}
+            style={{
+              background: 'none',
+              border: '1px solid var(--line)',
+              color: 'var(--chocolate)',
+              fontFamily: 'var(--font-body)',
+              fontSize: 11,
+              fontWeight: 700,
+              letterSpacing: '0.14em',
+              textTransform: 'uppercase',
+              padding: '10px 14px',
+              cursor: 'pointer',
+            }}
+          >
+            {t.nav.close}
+          </button>
+        </div>
+        <nav
+          style={{ display: 'flex', flexDirection: 'column', gap: 24, fontFamily: 'var(--font-display)', fontSize: 28, color: 'var(--chocolate)' }}
+          aria-label="Categories"
         >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <img src="assets/logos/Logo-Dark.png" alt="MOi & LiN" style={{ height: 22 }} />
-            <button
-              type="button"
+          {t.nav.categories.map((c, i) => (
+            <a
+              key={c}
+              href="#collection"
               onClick={toggleMenu}
               style={{
-                background: 'none',
-                border: '1px solid var(--line)',
                 color: 'var(--chocolate)',
-                fontFamily: 'var(--font-body)',
-                fontSize: 11,
-                fontWeight: 700,
-                letterSpacing: '0.14em',
-                textTransform: 'uppercase',
-                padding: '10px 14px',
-                cursor: 'pointer',
+                textDecoration: 'none',
+                opacity: menuOpen ? 1 : 0,
+                transform: menuOpen ? 'translateX(0)' : 'translateX(-10px)',
+                transition: `opacity 320ms var(--ease) ${60 + i * 60}ms, transform 320ms var(--ease) ${60 + i * 60}ms`,
               }}
             >
-              {t.nav.close}
-            </button>
-          </div>
-          <nav
-            style={{ display: 'flex', flexDirection: 'column', gap: 24, fontFamily: 'var(--font-display)', fontSize: 28, color: 'var(--chocolate)' }}
-            aria-label="Categories"
-          >
-            {t.nav.categories.map((c) => (
-              <a key={c} href="#collection" onClick={toggleMenu} style={{ color: 'var(--chocolate)', textDecoration: 'none' }}>
-                {c}
-              </a>
-            ))}
-          </nav>
-          <LanguageSwitcher variant="light" />
-          <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: 16, fontSize: 13, color: 'var(--ink-muted)' }}>
-            <span>{t.nav.account}</span>
-            <span>{t.nav.sizeGuide}</span>
-          </div>
+              {c}
+            </a>
+          ))}
+        </nav>
+        <LanguageSwitcher variant="light" />
+        <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: 16, fontSize: 13, color: 'var(--ink-muted)' }}>
+          <span>{t.nav.account}</span>
+          <span>{t.nav.sizeGuide}</span>
         </div>
-      )}
+      </div>
     </>
   );
 }

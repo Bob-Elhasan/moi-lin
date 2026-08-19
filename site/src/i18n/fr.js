@@ -100,6 +100,7 @@ export default {
   service: ['Livraison gratuite en Europe dès 150 €', 'Retours sous 30 jours', 'Fabriqué en Égypte', 'Paiement sécurisé via le revendeur'],
 
   collection: {
+    eyebrow: 'Chemises en lin pour femme',
     heading: 'Fait pour être porté. Aimé pendant des années.',
     productCount: (n) => `${n} ${n === 1 ? 'produit' : 'produits'}`,
     sortLabel: 'Trier',
@@ -144,7 +145,7 @@ export default {
       details: {
         Composition: '100 % lin égyptien, tissage popeline',
         Weight: '145 g/m², léger',
-        Fit: 'Coupe classique, droite',
+        Fit: 'Coupe classique, ajustée à la taille',
         Care: 'Lavage en machine à 30°, séchage à l’air libre, repassage à chaud modéré',
         Origin: 'Tissé et confectionné en Égypte',
         Delivery: '3 à 5 jours ouvrés en Europe',
@@ -155,7 +156,7 @@ export default {
       details: {
         Composition: '100 % lin égyptien, délavé après confection',
         Weight: '175 g/m², poids moyen',
-        Fit: 'Coupe ample, longueur plus généreuse',
+        Fit: 'Coupe ample, longueur plus généreuse, taille légèrement marquée',
         Care: 'Lavage en machine à 30°, séchage à l’air libre, repassage à chaud modéré',
         Origin: 'Tissé et confectionné en Égypte',
         Delivery: '3 à 5 jours ouvrés en Europe',
@@ -166,7 +167,7 @@ export default {
       details: {
         Composition: '100 % lin égyptien, provenant du delta du Nil',
         Weight: '155 g/m², léger à moyen',
-        Fit: 'Coupe classique, manche ajustée',
+        Fit: 'Coupe classique, manche ajustée, taille structurée',
         Care: 'Lavage en machine à 30°, séchage à l’air libre, repassage à chaud modéré',
         Origin: 'Tissé et confectionné en Égypte',
         Delivery: '3 à 5 jours ouvrés en Europe',

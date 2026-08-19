@@ -98,6 +98,7 @@ export default {
   service: ['Free European shipping over €150', '30-day returns', 'Made in Egypt', 'Secure payment via retailer'],
 
   collection: {
+    eyebrow: "Women's linen shirting",
     heading: 'Made to be worn. Loved for years.',
     productCount: (n) => `${n} ${n === 1 ? 'product' : 'products'}`,
     sortLabel: 'Sort',
@@ -131,7 +132,7 @@ export default {
       details: {
         Composition: '100% Egyptian linen, Nile Delta flax',
         Weight: '165 gsm, mid-weight',
-        Fit: 'Relaxed through chest and body, dropped shoulder',
+        Fit: 'Relaxed through the bust and body, dropped shoulder',
         Care: 'Machine wash 30°, line dry, warm iron',
         Origin: 'Woven and made in Egypt',
         Delivery: '3 to 5 working days across Europe',
@@ -142,7 +143,7 @@ export default {
       details: {
         Composition: '100% Egyptian linen, poplin weave',
         Weight: '145 gsm, light',
-        Fit: 'Classic, straight through the body',
+        Fit: 'Classic, tailored through the waist',
         Care: 'Machine wash 30°, line dry, warm iron',
         Origin: 'Woven and made in Egypt',
         Delivery: '3 to 5 working days across Europe',
@@ -153,7 +154,7 @@ export default {
       details: {
         Composition: '100% Egyptian linen, garment washed',
         Weight: '175 gsm, mid-weight',
-        Fit: 'Relaxed, longer body',
+        Fit: 'Relaxed, longer length, gently shaped waist',
         Care: 'Machine wash 30°, line dry, warm iron',
         Origin: 'Woven and made in Egypt',
         Delivery: '3 to 5 working days across Europe',
@@ -164,7 +165,7 @@ export default {
       details: {
         Composition: '100% Egyptian linen, Nile Delta flax',
         Weight: '155 gsm, light to mid',
-        Fit: 'Classic, trimmed sleeve',
+        Fit: 'Classic, fitted sleeve, tailored waist',
         Care: 'Machine wash 30°, line dry, warm iron',
         Origin: 'Woven and made in Egypt',
         Delivery: '3 to 5 working days across Europe',

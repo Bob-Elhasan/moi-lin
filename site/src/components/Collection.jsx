@@ -22,6 +22,19 @@ export default function Collection() {
   return (
     <>
       <section id="collection" data-pad="1" style={{ background: 'var(--ivory)', padding: '96px 80px 0' }}>
+        <p
+          style={{
+            fontFamily: 'var(--font-body)',
+            fontSize: 11,
+            fontWeight: 500,
+            letterSpacing: '0.14em',
+            textTransform: 'uppercase',
+            color: 'var(--camel)',
+            margin: '0 0 16px',
+          }}
+        >
+          {t.collection.eyebrow}
+        </p>
         <h2
           data-display-40="1"
           style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: 40, lineHeight: 1.1, color: 'var(--chocolate)', margin: '0 0 24px' }}
@@ -96,53 +109,63 @@ export default function Collection() {
           ))}
         </div>
 
-        {openProduct && openDetails && (
-          <div
-            data-cols3="1"
-            style={{
-              marginTop: 24,
-              borderTop: '1px solid var(--line)',
-              borderBottom: '1px solid var(--line)',
-              padding: '24px 0',
-              display: 'grid',
-              gridTemplateColumns: 'repeat(3,1fr)',
-              gap: '16px 40px',
-              fontFamily: 'var(--font-body)',
-            }}
-          >
-            <div style={{ gridColumn: '1/-1', display: 'flex', justifyContent: 'space-between', gap: 16, alignItems: 'baseline' }}>
-              <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--camel)' }}>
-                {openDetails.name}
-              </span>
-              <button
-                type="button"
-                onClick={() => setOpenId(null)}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  padding: 0,
-                  fontFamily: 'var(--font-body)',
-                  fontSize: 11,
-                  fontWeight: 600,
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase',
-                  color: 'var(--ink-muted)',
-                  cursor: 'pointer',
-                }}
-              >
-                {t.collection.close}
-              </button>
-            </div>
-            {Object.keys(openDetails.details).map((key) => (
-              <div key={key} style={{ display: 'flex', gap: 12, fontSize: 13, lineHeight: 1.6 }}>
-                <span style={{ minWidth: 96, fontSize: 11, fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--ink-muted)', paddingTop: 2 }}>
-                  {t.collection.detailLabels[key]}
+        <div
+          style={{
+            maxHeight: openProduct ? 600 : 0,
+            opacity: openProduct ? 1 : 0,
+            overflow: 'hidden',
+            transition: 'max-height 420ms var(--ease), opacity 280ms var(--ease)',
+          }}
+        >
+          {openDetails && (
+            <div
+              data-cols3="1"
+              style={{
+                marginTop: 24,
+                borderTop: '1px solid var(--line)',
+                borderBottom: '1px solid var(--line)',
+                padding: '24px 0',
+                display: 'grid',
+                gridTemplateColumns: 'repeat(3,1fr)',
+                gap: '16px 40px',
+                fontFamily: 'var(--font-body)',
+              }}
+            >
+              <div style={{ gridColumn: '1/-1', display: 'flex', justifyContent: 'space-between', gap: 16, alignItems: 'baseline' }}>
+                <span style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--camel)' }}>
+                  {openDetails.name}
                 </span>
-                <span style={{ color: 'var(--chocolate)' }}>{openDetails.details[key]}</span>
+                <button
+                  type="button"
+                  data-underline="1"
+                  onClick={() => setOpenId(null)}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    padding: 0,
+                    fontFamily: 'var(--font-body)',
+                    fontSize: 11,
+                    fontWeight: 600,
+                    letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
+                    color: 'var(--ink-muted)',
+                    cursor: 'pointer',
+                  }}
+                >
+                  {t.collection.close}
+                </button>
               </div>
-            ))}
-          </div>
-        )}
+              {Object.keys(openDetails.details).map((key) => (
+                <div key={key} style={{ display: 'flex', gap: 12, fontSize: 13, lineHeight: 1.6 }}>
+                  <span style={{ minWidth: 96, fontSize: 11, fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--ink-muted)', paddingTop: 2 }}>
+                    {t.collection.detailLabels[key]}
+                  </span>
+                  <span style={{ color: 'var(--chocolate)' }}>{openDetails.details[key]}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </section>
     </>
   );

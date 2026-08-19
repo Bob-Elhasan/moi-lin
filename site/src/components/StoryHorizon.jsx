@@ -18,6 +18,7 @@ export default function StoryHorizon() {
       }}
     >
       <Reveal
+        parallax
         style={{
           aspectRatio: '16/9',
           backgroundImage: 'url(assets/images/horizon.jpg)',

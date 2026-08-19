@@ -18,9 +18,10 @@ export default function LanguageSwitcher({ variant = 'light' }) {
           aria-pressed={lang === l.code}
           title={l.label}
           style={{
+            position: 'relative',
             background: 'none',
             border: 'none',
-            padding: 0,
+            padding: '0 0 4px',
             cursor: 'pointer',
             fontFamily: 'var(--font-body)',
             fontSize: 13,
@@ -28,6 +29,8 @@ export default function LanguageSwitcher({ variant = 'light' }) {
             color: lang === l.code ? active : dim,
             textTransform: 'uppercase',
             letterSpacing: '0.04em',
+            transition: 'color 200ms var(--ease), box-shadow 200ms var(--ease)',
+            boxShadow: lang === l.code ? `inset 0 -1.5px 0 0 ${active}` : 'inset 0 -1.5px 0 0 transparent',
           }}
         >
           {l.code}

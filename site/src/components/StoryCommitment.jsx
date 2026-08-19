@@ -70,6 +70,7 @@ export default function StoryCommitment() {
           </p>
         </Reveal>
         <Reveal
+          parallax
           style={{
             aspectRatio: '3/4',
             backgroundImage: 'url(assets/images/commitment-main.jpg)',
@@ -82,26 +83,30 @@ export default function StoryCommitment() {
         />
       </div>
 
-      <Reveal
-        data-cols3="1"
-        style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 24, marginTop: 64 }}
-      >
-        {CROPS.map((c) => (
-          <div
+      <div data-cols3="1" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 24, marginTop: 64 }}>
+        {CROPS.map((c, i) => (
+          <Reveal
             key={c.src}
-            style={{
-              aspectRatio: '1/1',
-              backgroundImage: `url(${c.src})`,
-              backgroundPosition: 'center',
-              backgroundSize: 'cover',
-              backgroundRepeat: 'no-repeat',
-              overflow: 'hidden',
-            }}
+            delay={i * 120}
+            data-zoom-parent="1"
+            style={{ aspectRatio: '1/1', overflow: 'hidden' }}
             role="img"
             aria-label={c.alt}
-          />
+          >
+            <div
+              data-zoom-layer="1"
+              style={{
+                width: '100%',
+                height: '100%',
+                backgroundImage: `url(${c.src})`,
+                backgroundPosition: 'center',
+                backgroundSize: 'cover',
+                backgroundRepeat: 'no-repeat',
+              }}
+            />
+          </Reveal>
         ))}
-      </Reveal>
+      </div>
     </section>
   );
 }

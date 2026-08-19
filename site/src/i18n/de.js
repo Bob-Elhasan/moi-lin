@@ -100,6 +100,7 @@ export default {
   service: ['Kostenloser Versand in Europa ab 150 €', '30 Tage Rückgaberecht', 'Hergestellt in Ägypten', 'Sichere Zahlung über den Händler'],
 
   collection: {
+    eyebrow: 'Leinenhemden für Damen',
     heading: 'Gemacht, um getragen zu werden. Geliebt für Jahre.',
     productCount: (n) => `${n} ${n === 1 ? 'Produkt' : 'Produkte'}`,
     sortLabel: 'Sortieren',
@@ -133,7 +134,7 @@ export default {
       details: {
         Composition: '100 % ägyptisches Leinen, Flachs aus dem Nildelta',
         Weight: '165 g/m², mittleres Gewicht',
-        Fit: 'Locker geschnitten an Brust und Körper, fallende Schulter',
+        Fit: 'Locker geschnitten an Büste und Körper, fallende Schulter',
         Care: 'Maschinenwäsche bei 30°, an der Luft trocknen, warm bügeln',
         Origin: 'Gewebt und gefertigt in Ägypten',
         Delivery: '3 bis 5 Werktage innerhalb Europas',
@@ -144,7 +145,7 @@ export default {
       details: {
         Composition: '100 % ägyptisches Leinen, Popeline-Gewebe',
         Weight: '145 g/m², leicht',
-        Fit: 'Klassisch, gerader Schnitt',
+        Fit: 'Klassisch, tailliert geschnitten',
         Care: 'Maschinenwäsche bei 30°, an der Luft trocknen, warm bügeln',
         Origin: 'Gewebt und gefertigt in Ägypten',
         Delivery: '3 bis 5 Werktage innerhalb Europas',
@@ -155,7 +156,7 @@ export default {
       details: {
         Composition: '100 % ägyptisches Leinen, nach der Konfektion gewaschen',
         Weight: '175 g/m², mittleres Gewicht',
-        Fit: 'Locker geschnitten, längerer Schnitt',
+        Fit: 'Locker geschnitten, längere Länge, sanft taillierte Silhouette',
         Care: 'Maschinenwäsche bei 30°, an der Luft trocknen, warm bügeln',
         Origin: 'Gewebt und gefertigt in Ägypten',
         Delivery: '3 bis 5 Werktage innerhalb Europas',
@@ -166,7 +167,7 @@ export default {
       details: {
         Composition: '100 % ägyptisches Leinen, Flachs aus dem Nildelta',
         Weight: '155 g/m², leicht bis mittel',
-        Fit: 'Klassisch, schlanker Ärmelschnitt',
+        Fit: 'Klassisch, schlanker Ärmelschnitt, tailliert',
         Care: 'Maschinenwäsche bei 30°, an der Luft trocknen, warm bügeln',
         Origin: 'Gewebt und gefertigt in Ägypten',
         Delivery: '3 bis 5 Werktage innerhalb Europas',

@@ -3,17 +3,18 @@ import { useLanguage } from '../i18n/LanguageContext';
 
 // Mobile-only. Appears once the visitor passes the first product section,
 // never during story sections, releases at the footer, stays dismissed for
-// the session once closed.
+// the session once closed. Always mounted so the show/hide can transition
+// smoothly instead of popping in and out.
 export default function StickyMobileCta({ visible }) {
   const { t } = useLanguage();
   const [dismissed, setDismissed] = useState(() => sessionStorage.getItem('moilin-cta-dismissed') === '1');
-
-  if (!visible || dismissed) return null;
+  const shown = visible && !dismissed;
 
   return (
     <div
       data-mobile-only="1"
       data-sticky-cta="1"
+      aria-hidden={!shown}
       style={{
         position: 'fixed',
         left: 0,
@@ -25,10 +26,15 @@ export default function StickyMobileCta({ visible }) {
         gap: 12,
         padding: '12px 16px',
         fontFamily: 'var(--font-body)',
+        transform: shown ? 'translateY(0)' : 'translateY(100%)',
+        opacity: shown ? 1 : 0,
+        pointerEvents: shown ? 'auto' : 'none',
+        transition: 'transform 320ms var(--ease), opacity 320ms var(--ease)',
       }}
     >
       <a
         href="#collection"
+        data-btn="1"
         style={{
           flex: 1,
           textAlign: 'center',

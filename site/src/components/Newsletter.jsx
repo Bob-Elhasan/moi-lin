@@ -62,7 +62,9 @@ export default function Newsletter() {
         </p>
 
         {subscribed ? (
-          <p style={{ fontSize: 15, color: 'var(--ivory)', margin: 0 }}>{t.newsletter.subscribedMessage}</p>
+          <p style={{ fontSize: 15, color: 'var(--ivory)', margin: 0, animation: 'hero-rise 500ms var(--ease) both' }}>
+            {t.newsletter.subscribedMessage}
+          </p>
         ) : (
           <form
             onSubmit={(e) => {
@@ -90,11 +92,13 @@ export default function Newsletter() {
                   border: '1px solid var(--line-on-chocolate)',
                   padding: '12px 16px',
                   borderRadius: 0,
+                  transition: 'border-color 200ms var(--ease)',
                 }}
               />
             </div>
             <button
               type="submit"
+              data-btn="1"
               style={{
                 fontFamily: 'var(--font-body)',
                 fontWeight: 700,

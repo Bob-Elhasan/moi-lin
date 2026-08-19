@@ -10,33 +10,43 @@ export default function ProductCard({ product, selectedColour, onSelectColour, o
   const name = t.products[product.id]?.name || product.id;
 
   return (
-    <div style={{ fontFamily: 'var(--font-body)', display: 'flex', flexDirection: 'column', gap: 12 }}>
+    <div data-card="1" style={{ fontFamily: 'var(--font-body)', display: 'flex', flexDirection: 'column', gap: 12 }}>
       <a
         href={href}
         target="_blank"
         rel="noreferrer"
+        data-zoom-parent="1"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         style={{
-          display: 'flex',
-          alignItems: 'flex-end',
+          position: 'relative',
+          display: 'block',
           textDecoration: 'none',
           aspectRatio: '3/4',
-          background: frameOf(sel, hovered),
-          padding: 16,
-          fontSize: 11,
-          fontWeight: 500,
-          letterSpacing: '0.14em',
-          textTransform: 'uppercase',
-          color: 'var(--chocolate)',
-          transition: 'background-color 400ms var(--ease)',
+          overflow: 'hidden',
         }}
       >
-        {hovered ? t.collection.hoverLabel : t.collection.onBodyLabel(name, t.colours[sel] || sel)}
+        <div data-zoom-layer="1" style={{ position: 'absolute', inset: 0, background: frameOf(sel, hovered), transition: 'background-color 400ms var(--ease)' }} />
+        <div
+          style={{
+            position: 'relative',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'flex-end',
+            padding: 16,
+            fontSize: 11,
+            fontWeight: 500,
+            letterSpacing: '0.14em',
+            textTransform: 'uppercase',
+            color: 'var(--chocolate)',
+          }}
+        >
+          {hovered ? t.collection.hoverLabel : t.collection.onBodyLabel(name, t.colours[sel] || sel)}
+        </div>
       </a>
 
       <div style={{ display: 'flex', justifyContent: 'space-between', gap: 16, alignItems: 'baseline' }}>
-        <a href={href} target="_blank" rel="noreferrer" style={{ fontSize: 15, fontWeight: 500, color: 'var(--chocolate)', textDecoration: 'none' }}>
+        <a href={href} target="_blank" rel="noreferrer" data-underline="1" style={{ fontSize: 15, fontWeight: 500, color: 'var(--chocolate)' }}>
           {name}
         </a>
         <span style={{ fontSize: 15, color: 'var(--ink-muted)' }}>€{product.price}</span>
@@ -65,9 +75,21 @@ export default function ProductCard({ product, selectedColour, onSelectColour, o
               color: 'var(--ink-muted)',
               outline: sel === c ? '1px solid var(--chocolate)' : 'none',
               outlineOffset: 3,
+              transition: 'outline-color 200ms var(--ease)',
             }}
           >
-            <span aria-hidden="true" style={{ width: 14, height: 14, display: 'block', border: '1px solid var(--line)', background: swatchOf(c) }} />
+            <span
+              aria-hidden="true"
+              style={{
+                width: 14,
+                height: 14,
+                display: 'block',
+                border: '1px solid var(--line)',
+                background: swatchOf(c),
+                transition: 'transform 200ms var(--ease)',
+                transform: sel === c ? 'scale(1.15)' : 'scale(1)',
+              }}
+            />
             {t.colours[c] || c}
           </button>
         ))}
@@ -92,12 +114,14 @@ export default function ProductCard({ product, selectedColour, onSelectColour, o
           href={href}
           target="_blank"
           rel="noreferrer"
+          data-underline="1"
           style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--camel)' }}
         >
           {t.collection.shopAt(product.retailer)}
         </a>
         <button
           type="button"
+          data-btn="1"
           onClick={onToggleDetails}
           aria-expanded={open}
           style={{

@@ -1,4 +1,5 @@
 import { useLanguage } from '../i18n/LanguageContext';
+import Reveal from './Reveal';
 
 const COLUMN_HREFS = {
   shop: ['#collection', '#collection', '#collection', '#collection'],
@@ -11,7 +12,7 @@ export default function Footer() {
   const columns = t.footer.columns;
 
   return (
-    <footer data-pad="1" style={{ background: 'var(--chocolate)', color: 'var(--ivory)', fontFamily: 'var(--font-body)', padding: '96px 80px 40px' }}>
+    <Reveal as="footer" data-pad="1" style={{ background: 'var(--chocolate)', color: 'var(--ivory)', fontFamily: 'var(--font-body)', padding: '96px 80px 40px' }}>
       <div data-cols4="1" style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr 1fr', gap: 40 }}>
         <div>
           <img src="assets/logos/Logo-White.png" alt="MOi & LiN" style={{ height: 64, width: 'auto', display: 'block', marginBottom: 16 }} />
@@ -23,7 +24,7 @@ export default function Footer() {
           <div key={key} style={{ display: 'flex', flexDirection: 'column', gap: 12, fontSize: 13, color: 'var(--ink-muted-on-chocolate)' }}>
             <span style={{ fontSize: 13, fontWeight: 600, color: 'var(--ivory)' }}>{col.title}</span>
             {col.links.map((label, i) => (
-              <a key={label} href={COLUMN_HREFS[key][i]} style={{ color: 'var(--ink-muted-on-chocolate)' }}>
+              <a key={label} href={COLUMN_HREFS[key][i]} data-underline="1" style={{ color: 'var(--ink-muted-on-chocolate)' }}>
                 {label}
               </a>
             ))}
@@ -48,6 +49,6 @@ export default function Footer() {
         <span>{t.footer.copyright(new Date().getFullYear())}</span>
         <span>{t.footer.region}</span>
       </div>
-    </footer>
+    </Reveal>
   );
 }
