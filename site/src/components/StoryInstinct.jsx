@@ -1,4 +1,5 @@
 import Reveal from './Reveal';
+import ParallaxPhoto from './ParallaxPhoto';
 import { useLanguage } from '../i18n/LanguageContext';
 
 export default function StoryInstinct() {
@@ -18,19 +19,17 @@ export default function StoryInstinct() {
         alignItems: 'center',
       }}
     >
-      <Reveal
-        parallax
-        parallaxRange={10}
-        style={{
-          aspectRatio: '3/4',
-          backgroundImage: 'url(assets/images/instinct.jpg)',
-          backgroundPosition: 'center',
-          backgroundSize: 'contain',
-          backgroundRepeat: 'no-repeat',
-        }}
-        role="img"
-        aria-label="Archival early 1990s European fashion backstage photograph"
-      />
+      <Reveal>
+        <ParallaxPhoto
+          base="assets/images/instinct"
+          sizes="(max-width: 900px) 100vw, 45vw"
+          range={10}
+          fit="contain"
+          style={{ aspectRatio: '3/4' }}
+          role="img"
+          aria-label="Archival early 1990s European fashion backstage photograph"
+        />
+      </Reveal>
       <Reveal>
         <p
           style={{

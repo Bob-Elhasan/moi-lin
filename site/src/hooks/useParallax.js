@@ -1,15 +1,19 @@
 import { useEffect, useRef } from 'react';
 
-// Subtle vertical drift on a background-image element as it crosses the
-// viewport — a few percent of travel, never more. Disabled under
-// prefers-reduced-motion (handled in CSS, but we also skip the work here).
-export function useParallax(range = 14) {
+// Subtle vertical drift on an image as it crosses the viewport — a few
+// percent of travel, never more. Applies `transform: scale(base) translateY()`
+// directly on the element (works for <img> or a background div alike).
+// Skipped under prefers-reduced-motion, on small viewports, and on touch —
+// scroll-tied JS work that mostly goes unseen on a fast mobile scroll.
+export function useParallax(range = 14, baseScale = 1.1) {
   const ref = useRef(null);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (window.matchMedia('(max-width: 900px)').matches) return;
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
 
     let ticking = false;
     const update = () => {
@@ -19,7 +23,7 @@ export function useParallax(range = 14) {
       // progress: -1 when section bottom is at viewport top, +1 when section top is at viewport bottom
       const progress = (rect.top + rect.height / 2 - vh / 2) / (vh / 2 + rect.height / 2);
       const offset = Math.max(-1, Math.min(1, progress)) * range;
-      el.style.backgroundPosition = `center calc(50% + ${offset}px)`;
+      el.style.transform = `scale(${baseScale}) translateY(${offset}px)`;
     };
     const onScroll = () => {
       if (!ticking) {
@@ -34,7 +38,7 @@ export function useParallax(range = 14) {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
     };
-  }, [range]);
+  }, [range, baseScale]);
 
   return ref;
 }

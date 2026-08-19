@@ -1,8 +1,13 @@
 import { useLanguage } from '../i18n/LanguageContext';
+import Photo from './Photo';
 
 const BACKGROUNDS = ['var(--dusty-blue)', '#94A7B4', '#CDB08A'];
+// Real photography where it exists (manifest base path); the flat
+// placeholder colour otherwise.
+const IMAGES = ['assets/images/tiles/ivory-edit', 'assets/images/tiles/quiet-blue', 'assets/images/tiles/warm-neutrals'];
+const TILE_SIZES = '(max-width: 900px) 78vw, 30vw';
 
-function CategoryTile({ name, descriptor, background }) {
+function CategoryTile({ name, descriptor, background, image }) {
   return (
     <a
       href="#collection"
@@ -13,9 +18,20 @@ function CategoryTile({ name, descriptor, background }) {
         aspectRatio: '3/4',
         overflow: 'hidden',
         textDecoration: 'none',
+        minWidth: 0,
       }}
     >
-      <div data-zoom-layer="1" style={{ position: 'absolute', inset: 0, background }} />
+      {image ? (
+        <Photo
+          base={image}
+          sizes={TILE_SIZES}
+          data-zoom-layer="1"
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }}
+          imgStyle={{ width: '100%', height: '100%', objectFit: 'cover' }}
+        />
+      ) : (
+        <div data-zoom-layer="1" style={{ position: 'absolute', inset: 0, background }} />
+      )}
       <div
         style={{
           position: 'absolute',
@@ -46,6 +62,7 @@ function CategoryTile({ name, descriptor, background }) {
 // lift to ivory is the signal the visitor has moved from reading to
 // shopping. Hover-only interaction feedback (image zoom) is fine here;
 // scroll-triggered reveals are not (a grid that fades in reads as unreliable).
+// On mobile the row becomes a swipeable carousel instead of a 2-up grid.
 export default function CategoryTiles() {
   const { t } = useLanguage();
   return (
@@ -70,9 +87,9 @@ export default function CategoryTiles() {
           {t.tiles.viewAll}
         </a>
       </div>
-      <div data-cols3="1" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 24 }}>
+      <div data-cols3="1" data-carousel="1" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 24 }}>
         {t.tiles.items.map((tile, i) => (
-          <CategoryTile key={tile.name} {...tile} background={BACKGROUNDS[i]} />
+          <CategoryTile key={tile.name} {...tile} background={BACKGROUNDS[i]} image={IMAGES[i]} />
         ))}
       </div>
     </section>

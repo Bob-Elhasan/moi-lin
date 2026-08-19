@@ -96,7 +96,7 @@ export default function Collection() {
       </div>
 
       <section data-pad="1" style={{ background: 'var(--ivory)', padding: '40px 80px 96px' }}>
-        <div data-cols4="1" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '24px 24px' }}>
+        <div data-cols4="1" data-carousel="1" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '24px 24px' }}>
           {products.map((p) => (
             <ProductCard
               key={p.id}

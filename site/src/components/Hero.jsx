@@ -1,11 +1,10 @@
 import { useLanguage } from '../i18n/LanguageContext';
-import { useParallax } from '../hooks/useParallax';
+import ParallaxPhoto from './ParallaxPhoto';
 
 const heroIn = (delay) => ({ '--hero-delay': `${delay}ms` });
 
 export default function Hero() {
   const { t } = useLanguage();
-  const parallaxRef = useParallax(20);
 
   return (
     <section
@@ -115,17 +114,13 @@ export default function Hero() {
         </div>
       </div>
 
-      <div
-        ref={parallaxRef}
-        data-parallax="1"
-        style={{
-          minHeight: 640,
-          backgroundImage: 'url(assets/images/hero.jpg)',
-          backgroundPosition: 'center',
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
-          transform: 'scale(1.08)',
-        }}
+      <ParallaxPhoto
+        base="assets/images/hero"
+        eager
+        sizes="(max-width: 900px) 100vw, 48vw"
+        range={20}
+        data-hero-image="1"
+        style={{ minHeight: 640 }}
         role="img"
         aria-label="Linen shirt in raking daylight against a plaster wall"
       />

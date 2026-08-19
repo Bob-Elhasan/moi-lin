@@ -1,4 +1,5 @@
 import Reveal from './Reveal';
+import ParallaxPhoto from './ParallaxPhoto';
 import { useLanguage } from '../i18n/LanguageContext';
 
 export default function StoryHorizon() {
@@ -17,19 +18,15 @@ export default function StoryHorizon() {
         alignItems: 'center',
       }}
     >
-      <Reveal
-        parallax
-        style={{
-          aspectRatio: '16/9',
-          backgroundImage: 'url(assets/images/horizon.jpg)',
-          backgroundPosition: 'center',
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
-          overflow: 'hidden',
-        }}
-        role="img"
-        aria-label="A European interior with Egyptian fabric"
-      />
+      <Reveal>
+        <ParallaxPhoto
+          base="assets/images/horizon"
+          sizes="(max-width: 900px) 100vw, 45vw"
+          style={{ aspectRatio: '16/9' }}
+          role="img"
+          aria-label="A European interior with Egyptian fabric"
+        />
+      </Reveal>
       <Reveal>
         <p
           style={{

@@ -1,6 +1,53 @@
 import { useState } from 'react';
 import { SIZES, frameOf, hrefFor, swatchOf } from '../data/products';
 import { useLanguage } from '../i18n/LanguageContext';
+import Photo from './Photo';
+
+// A card only ever renders at a fraction of the viewport — never the full
+// desktop image width, and on the mobile carousel more like 85vw.
+const PRODUCT_IMG_SIZES = '(max-width: 900px) 85vw, (max-width: 1300px) 30vw, 22vw';
+const imgFillStyle = { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center' };
+
+// Real photography where it exists (thumb + a hover crop, crossfaded per the
+// brief); the flat placeholder frame everywhere else until it does.
+function ProductImage({ images, hovered, placeholderLabel }) {
+  if (!images) {
+    return (
+      <>
+        <div data-zoom-layer="1" style={{ position: 'absolute', inset: 0, background: placeholderLabel.background, transition: 'background-color 400ms var(--ease)' }} />
+        <div
+          style={{
+            position: 'relative',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'flex-end',
+            padding: 16,
+            fontSize: 11,
+            fontWeight: 500,
+            letterSpacing: '0.14em',
+            textTransform: 'uppercase',
+            color: 'var(--chocolate)',
+          }}
+        >
+          {placeholderLabel.text}
+        </div>
+      </>
+    );
+  }
+  return (
+    <div data-zoom-layer="1" style={{ position: 'absolute', inset: 0 }}>
+      <Photo base={images.thumb} sizes={PRODUCT_IMG_SIZES} eager={images.eager} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} imgStyle={imgFillStyle} />
+      {images.hover && (
+        <Photo
+          base={images.hover}
+          sizes={PRODUCT_IMG_SIZES}
+          style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: hovered ? 1 : 0, transition: 'opacity 400ms var(--ease)' }}
+          imgStyle={imgFillStyle}
+        />
+      )}
+    </div>
+  );
+}
 
 export default function ProductCard({ product, selectedColour, onSelectColour, open, onToggleDetails }) {
   const [hovered, setHovered] = useState(false);
@@ -8,9 +55,10 @@ export default function ProductCard({ product, selectedColour, onSelectColour, o
   const sel = selectedColour || product.colours[0];
   const href = hrefFor(product, sel);
   const name = t.products[product.id]?.name || product.id;
+  const images = product.images?.[sel];
 
   return (
-    <div data-card="1" style={{ fontFamily: 'var(--font-body)', display: 'flex', flexDirection: 'column', gap: 12 }}>
+    <div data-card="1" style={{ fontFamily: 'var(--font-body)', display: 'flex', flexDirection: 'column', gap: 12, minWidth: 0 }}>
       <a
         href={href}
         target="_blank"
@@ -26,23 +74,14 @@ export default function ProductCard({ product, selectedColour, onSelectColour, o
           overflow: 'hidden',
         }}
       >
-        <div data-zoom-layer="1" style={{ position: 'absolute', inset: 0, background: frameOf(sel, hovered), transition: 'background-color 400ms var(--ease)' }} />
-        <div
-          style={{
-            position: 'relative',
-            height: '100%',
-            display: 'flex',
-            alignItems: 'flex-end',
-            padding: 16,
-            fontSize: 11,
-            fontWeight: 500,
-            letterSpacing: '0.14em',
-            textTransform: 'uppercase',
-            color: 'var(--chocolate)',
+        <ProductImage
+          images={images}
+          hovered={hovered}
+          placeholderLabel={{
+            background: frameOf(sel, hovered),
+            text: hovered ? t.collection.hoverLabel : t.collection.onBodyLabel(name, t.colours[sel] || sel),
           }}
-        >
-          {hovered ? t.collection.hoverLabel : t.collection.onBodyLabel(name, t.colours[sel] || sel)}
-        </div>
+        />
       </a>
 
       <div style={{ display: 'flex', justifyContent: 'space-between', gap: 16, alignItems: 'baseline' }}>

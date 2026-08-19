@@ -35,21 +35,33 @@ img { max-width: 100%; display: block; }
   background: currentColor;
   transition: right 280ms var(--ease);
 }
-[data-underline]:hover::after, [data-underline]:focus-visible::after { right: 0; }
+[data-underline]:focus-visible::after { right: 0; }
 
 /* buttons: lift on hover/focus, press back down on click — no shadow added,
    just a small translate so it reads as responsive rather than flat-dead */
 [data-btn] { transition: transform 200ms var(--ease), background-color 200ms var(--ease), color 200ms var(--ease), border-color 200ms var(--ease); }
-[data-btn]:hover { transform: translateY(-2px); }
 [data-btn]:active { transform: translateY(0); }
 
-/* image layers used for hover-zoom (product cards, category tiles) */
-[data-zoom-layer] { transition: transform 500ms var(--ease); }
-[data-zoom-parent]:hover [data-zoom-layer] { transform: scale(1.045); }
+/* hover-only refinements — gated so touch devices don't get a hover state
+   stuck "on" after a tap, which reads as a visual bug rather than feedback */
+@media (hover: hover) and (pointer: fine) {
+  [data-underline]:hover::after { right: 0; }
+  [data-btn]:hover { transform: translateY(-2px); }
+}
 
-/* whole-card lift on hover (product cards) */
-[data-card] { transition: transform 250ms var(--ease); }
-[data-card]:hover { transform: translateY(-4px); }
+/* image layers used for hover-zoom (product cards, category tiles). Gated to
+   devices that actually have hover, so touch doesn't get a "stuck" zoomed
+   state after a tap (iOS/Android apply :hover on tap and hold it). */
+[data-zoom-layer] { transition: transform 500ms var(--ease); }
+@media (hover: hover) and (pointer: fine) {
+  [data-zoom-parent]:hover [data-zoom-layer] { transform: scale(1.045); }
+  [data-card] { transition: transform 250ms var(--ease); }
+  [data-card]:hover { transform: translateY(-4px); }
+}
+
+/* grid items sized by an image must not let the image's intrinsic size push
+   the track wider than its fr share — the classic CSS Grid overflow trap */
+[data-cols3] > *, [data-cols4] > * { min-width: 0; }
 
 /* subtle parallax drift on story imagery — position set via JS as the
    section scrolls, disabled entirely under reduced motion below */
@@ -73,19 +85,43 @@ img { max-width: 100%; display: block; }
 
 [data-mobile-only] { display: none; }
 
+/* Horizontal swipe carousel — native scroll-snap, no JS. Used on mobile for
+   the product grid, category tiles, and the fabric-detail crops, all of
+   which are dense image rows that read far better as a swipe than a long
+   vertical stack of full-width photos. */
+[data-carousel] {
+  display: grid;
+  grid-auto-flow: column;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+[data-carousel]::-webkit-scrollbar { display: none; }
+[data-carousel] > * { scroll-snap-align: start; }
+
 @media (max-width: 900px) {
   [data-mobile-only] { display: block; }
   [data-sticky-cta] { display: flex; }
   [data-desktop-only] { display: none !important; }
-  [data-split], [data-hero], [data-cols3] { grid-template-columns: 1fr !important; }
-  [data-cols4] { grid-template-columns: repeat(2, 1fr) !important; }
+  [data-split], [data-hero] { grid-template-columns: 1fr !important; }
+  [data-cols3]:not([data-carousel]) { grid-template-columns: 1fr !important; }
+  [data-cols3]:not([data-carousel]) > * { border-right: none !important; }
+  [data-cols4]:not([data-carousel]) { grid-template-columns: repeat(2, 1fr) !important; }
   [data-pad] { padding-left: 24px !important; padding-right: 24px !important; }
   [data-story] { padding-top: 96px !important; padding-bottom: 96px !important; }
   [data-hero-copy] { padding: 64px 24px !important; }
+  [data-hero-image] { aspect-ratio: 4 / 5 !important; min-height: 0 !important; }
   [data-display-88] { font-size: 40px !important; }
   [data-display-64] { font-size: 40px !important; }
   [data-display-40] { font-size: 28px !important; }
   [data-proof-row] { flex-wrap: wrap; }
   [data-proof-cell] { flex: 1 1 45% !important; border-right: none !important; border-bottom: 1px solid var(--line); }
   [data-proof-cell-choc] { border-bottom: 1px solid var(--line-on-chocolate); }
+
+  /* the components set an explicit desktop grid-template-columns inline;
+     it must be cleared for grid-auto-columns to take over on mobile */
+  [data-carousel] { grid-template-columns: none !important; gap: 16px; padding-bottom: 4px; grid-auto-columns: 82%; }
+  [data-carousel="tight"] { grid-auto-columns: 68%; gap: 12px; }
 }
