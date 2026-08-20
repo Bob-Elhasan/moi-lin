@@ -3,7 +3,7 @@ export default {
   code: 'en',
 
   nav: {
-    categories: ['Shirts', 'Trousers', 'Outerwear', 'Accessories'],
+    categories: ['Men', 'Women', 'Accessories'],
     search: 'Search',
     account: 'Account',
     bag: (n) => `Bag (${n})`,
@@ -15,17 +15,16 @@ export default {
   announcement: 'Free European shipping over €150',
 
   hero: {
-    eyebrow: 'Cairo 1998 · Now in Europe',
+    eyebrow: 'Egypt 1998 · Now in Europe',
     headline: 'Worn into the skin. Woven into who you are.',
     editorial: 'Egyptian linen. Thirty years in the making.',
-    body: 'The quality of a fabric is felt before it is seen. We have built everything on that one conviction since the first room in Cairo.',
+    body: 'The quality of a fabric is felt before it is seen. We have built everything on that one conviction since the first room in Egypt.',
     primaryCta: 'Read the story',
     secondaryCta: 'Shop the collection',
   },
 
   proof: [
-    { label: '1998', detail: 'First door in Cairo' },
-    { label: 'Ten locations', detail: 'Built one standard at a time' },
+    { label: '1998', detail: 'First door in Egypt' },
     { label: '100+ craftspeople', detail: 'In our own manufacturing' },
     { label: 'Nile Delta linen', detail: 'Cultivated for five thousand years' },
   ],
@@ -39,9 +38,9 @@ export default {
 
   commitment: {
     eyebrow: 'The commitment',
-    headline: 'Cairo, 1998. One room, one standard.',
+    headline: 'Egypt, 1998. One room, one standard.',
     body: 'That everyone who walked through the door deserved clothes made with full material integrity.',
-    quiet: 'That standard grew. Ten locations. A manufacturing operation of over a hundred skilled hands. A supply chain rooted in the Nile Delta, where linen has been cultivated for five thousand years. Every piece that left carried the same conviction as the first.',
+    quiet: 'That standard grew. A manufacturing operation of over a hundred skilled hands. A supply chain rooted in the Nile Delta, where linen has been cultivated for five thousand years. Every piece that left carried the same conviction as the first.',
   },
 
   name: {
@@ -83,7 +82,7 @@ export default {
       {
         title: 'Reliability',
         sub: 'Earned before arrived.',
-        body: 'Three decades. Ten locations. A hundred craftspeople. The confidence MOi & LiN brings to Europe was built quietly, long before the first European door opened.',
+        body: 'Three decades. A hundred craftspeople. The confidence MOi & LiN brings to Europe was built quietly, long before the first European door opened.',
       },
     ],
   },
@@ -188,11 +187,11 @@ export default {
     tagline: 'Made in Egypt. Designed for Europe.',
     columns: {
       shop: { title: 'Shop', links: ['The collection', 'The Ivory Edit', 'Quiet Blue', 'Warm Neutrals'] },
-      about: { title: 'About', links: ['The instinct', 'Cairo, 1998', 'The name', 'Our partners'] },
+      about: { title: 'About', links: ['The instinct', 'Egypt, 1998', 'The name', 'Our partners'] },
       care: { title: 'Customer care', links: ['Size guide', 'Shipping', 'Returns', 'Contact'] },
     },
     copyright: (year) => `© ${year} MOi & LiN`,
-    region: 'Cairo · Europe',
+    region: 'Egypt · Europe',
   },
 
   stickyCta: {

@@ -5,7 +5,7 @@ export default {
   code: 'de',
 
   nav: {
-    categories: ['Hemden', 'Hosen', 'Oberbekleidung', 'Accessoires'],
+    categories: ['Herren', 'Damen', 'Accessoires'],
     search: 'Suchen',
     account: 'Konto',
     bag: (n) => `Warenkorb (${n})`,
@@ -17,17 +17,16 @@ export default {
   announcement: 'Kostenloser Versand in Europa ab 150 €',
 
   hero: {
-    eyebrow: 'Kairo 1998 · Jetzt in Europa',
+    eyebrow: 'Ägypten 1998 · Jetzt in Europa',
     headline: 'Auf der Haut getragen. Eingewebt in das, was Sie sind.',
     editorial: 'Ägyptisches Leinen. Dreißig Jahre in der Entstehung.',
-    body: 'Die Qualität eines Stoffes spürt man, bevor man sie sieht. Wir haben alles auf dieser einen Überzeugung aufgebaut, seit dem ersten Raum in Kairo.',
+    body: 'Die Qualität eines Stoffes spürt man, bevor man sie sieht. Wir haben alles auf dieser einen Überzeugung aufgebaut, seit dem ersten Raum in Ägypten.',
     primaryCta: 'Die Geschichte lesen',
     secondaryCta: 'Zur Kollektion',
   },
 
   proof: [
-    { label: '1998', detail: 'Erste Tür in Kairo' },
-    { label: 'Zehn Standorte', detail: 'Ein Standard nach dem anderen aufgebaut' },
+    { label: '1998', detail: 'Erste Tür in Ägypten' },
     { label: 'Über 100 Handwerker', detail: 'In unserer eigenen Fertigung' },
     { label: 'Leinen aus dem Nildelta', detail: 'Seit fünftausend Jahren angebaut' },
   ],
@@ -41,9 +40,9 @@ export default {
 
   commitment: {
     eyebrow: 'Das Versprechen',
-    headline: 'Kairo, 1998. Ein Raum, ein Standard.',
+    headline: 'Ägypten, 1998. Ein Raum, ein Standard.',
     body: 'Dass jeder, der durch diese Tür trat, Kleidung verdiente, die mit voller Materialintegrität gefertigt wurde.',
-    quiet: 'Dieser Standard wuchs. Zehn Standorte. Eine Fertigung mit über hundert geschickten Händen. Eine Lieferkette, verwurzelt im Nildelta, wo Leinen seit fünftausend Jahren angebaut wird. Jedes Stück, das unser Haus verließ, trug dieselbe Überzeugung wie das erste.',
+    quiet: 'Dieser Standard wuchs. Eine Fertigung mit über hundert geschickten Händen. Eine Lieferkette, verwurzelt im Nildelta, wo Leinen seit fünftausend Jahren angebaut wird. Jedes Stück, das unser Haus verließ, trug dieselbe Überzeugung wie das erste.',
   },
 
   name: {
@@ -85,7 +84,7 @@ export default {
       {
         title: 'Verlässlichkeit',
         sub: 'Verdient, bevor sie ankam.',
-        body: 'Drei Jahrzehnte. Zehn Standorte. Hundert Handwerker. Das Vertrauen, das MOi & LiN nach Europa bringt, entstand still, lange bevor die erste europäische Tür sich öffnete.',
+        body: 'Drei Jahrzehnte. Hundert Handwerker. Das Vertrauen, das MOi & LiN nach Europa bringt, entstand still, lange bevor die erste europäische Tür sich öffnete.',
       },
     ],
   },
@@ -190,11 +189,11 @@ export default {
     tagline: 'Hergestellt in Ägypten. Entworfen für Europa.',
     columns: {
       shop: { title: 'Shop', links: ['Die Kollektion', 'The Ivory Edit', 'Quiet Blue', 'Warm Neutrals'] },
-      about: { title: 'Über uns', links: ['Der Instinkt', 'Kairo, 1998', 'Der Name', 'Unsere Partner'] },
+      about: { title: 'Über uns', links: ['Der Instinkt', 'Ägypten, 1998', 'Der Name', 'Unsere Partner'] },
       care: { title: 'Kundenservice', links: ['Größentabelle', 'Versand', 'Rückgabe', 'Kontakt'] },
     },
     copyright: (year) => `© ${year} MOi & LiN`,
-    region: 'Kairo · Europa',
+    region: 'Ägypten · Europa',
   },
 
   stickyCta: {

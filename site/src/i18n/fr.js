@@ -5,7 +5,7 @@ export default {
   code: 'fr',
 
   nav: {
-    categories: ['Chemises', 'Pantalons', 'Extérieur', 'Accessoires'],
+    categories: ['Homme', 'Femme', 'Accessoires'],
     search: 'Rechercher',
     account: 'Compte',
     bag: (n) => `Panier (${n})`,
@@ -17,17 +17,16 @@ export default {
   announcement: 'Livraison gratuite en Europe dès 150 €',
 
   hero: {
-    eyebrow: 'Le Caire 1998 · Désormais en Europe',
+    eyebrow: 'Égypte 1998 · Désormais en Europe',
     headline: 'Porté à même la peau. Tissé dans ce que vous êtes.',
     editorial: 'Lin égyptien. Trente ans de fabrication.',
-    body: "On sent la qualité d'un tissu avant de la voir. Nous avons tout construit sur cette seule conviction depuis la première pièce, au Caire.",
+    body: "On sent la qualité d'un tissu avant de la voir. Nous avons tout construit sur cette seule conviction depuis la première pièce, en Égypte.",
     primaryCta: "Découvrir l'histoire",
     secondaryCta: 'Voir la collection',
   },
 
   proof: [
-    { label: '1998', detail: 'Première porte ouverte au Caire' },
-    { label: 'Dix adresses', detail: 'Une exigence bâtie pas à pas' },
+    { label: '1998', detail: 'Première porte ouverte en Égypte' },
     { label: 'Plus de 100 artisans', detail: 'Au sein de notre propre production' },
     { label: 'Lin du delta du Nil', detail: 'Cultivé depuis cinq mille ans' },
   ],
@@ -41,9 +40,9 @@ export default {
 
   commitment: {
     eyebrow: "L'engagement",
-    headline: 'Le Caire, 1998. Une pièce, une exigence.',
+    headline: 'Égypte, 1998. Une pièce, une exigence.',
     body: "Que quiconque franchissait cette porte méritait des vêtements faits avec une entière intégrité de matière.",
-    quiet: "Cette exigence a grandi. Dix adresses. Une production réunissant plus de cent mains expertes. Une chaîne d'approvisionnement enracinée dans le delta du Nil, où le lin est cultivé depuis cinq mille ans. Chaque pièce sortie de nos ateliers a porté la même conviction que la première.",
+    quiet: "Cette exigence a grandi. Une production réunissant plus de cent mains expertes. Une chaîne d'approvisionnement enracinée dans le delta du Nil, où le lin est cultivé depuis cinq mille ans. Chaque pièce sortie de nos ateliers a porté la même conviction que la première.",
   },
 
   name: {
@@ -85,7 +84,7 @@ export default {
       {
         title: 'Fiabilité',
         sub: 'Gagnée avant même son arrivée.',
-        body: "Trois décennies. Dix adresses. Cent artisans. La confiance que MOi & LiN apporte en Europe s'est construite en silence, bien avant que la première porte européenne ne s'ouvre.",
+        body: "Trois décennies. Cent artisans. La confiance que MOi & LiN apporte en Europe s'est construite en silence, bien avant que la première porte européenne ne s'ouvre.",
       },
     ],
   },
@@ -190,11 +189,11 @@ export default {
     tagline: "Fabriqué en Égypte. Conçu pour l'Europe.",
     columns: {
       shop: { title: 'Boutique', links: ['La collection', 'The Ivory Edit', 'Quiet Blue', 'Warm Neutrals'] },
-      about: { title: 'À propos', links: ["L'instinct", 'Le Caire, 1998', 'Le nom', 'Nos partenaires'] },
+      about: { title: 'À propos', links: ["L'instinct", 'Égypte, 1998', 'Le nom', 'Nos partenaires'] },
       care: { title: 'Service client', links: ['Guide des tailles', 'Livraison', 'Retours', 'Contact'] },
     },
     copyright: (year) => `© ${year} MOi & LiN`,
-    region: 'Le Caire · Europe',
+    region: 'Égypte · Europe',
   },
 
   stickyCta: {

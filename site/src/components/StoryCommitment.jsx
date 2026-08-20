@@ -77,7 +77,7 @@ export default function StoryCommitment() {
             sizes="(max-width: 900px) 100vw, 45vw"
             style={{ aspectRatio: '3/4' }}
             role="img"
-            aria-label="Hands at work in the Cairo workshop"
+            aria-label="Hands at work in the Egyptian workshop"
           />
         </Reveal>
       </div>
