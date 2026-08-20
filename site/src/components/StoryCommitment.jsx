@@ -4,9 +4,9 @@ import Photo from './Photo';
 import { useLanguage } from '../i18n/LanguageContext';
 
 const CROPS = [
-  { base: 'assets/images/commitment-crop-1', alt: 'Raw flax before spinning' },
+  { base: 'assets/images/commitment-crop-1', alt: 'A hand gathering harvested flax stalks in the field' },
   { base: 'assets/images/commitment-crop-2', alt: 'Detail of selvedge and buttonhole stitching' },
-  { base: 'assets/images/commitment-crop-3', alt: 'A Nile Delta flax field in low sun' },
+  { base: 'assets/images/commitment-crop-3', alt: 'A weaving workshop, looms and spun yarn' },
 ];
 
 export default function StoryCommitment() {
@@ -86,7 +86,14 @@ export default function StoryCommitment() {
           rather than three full-width squares stacked one under another. */}
       <div data-cols3="1" data-carousel="tight" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 24, marginTop: 64 }}>
         {CROPS.map((c, i) => (
-          <Reveal key={c.base} delay={i * 120} data-zoom-parent="1" style={{ aspectRatio: '1/1', overflow: 'hidden', minWidth: 0 }} role="img" aria-label={c.alt}>
+          <Reveal
+            key={c.base}
+            delay={i * 120}
+            data-zoom-parent="1"
+            style={{ position: 'relative', aspectRatio: '1/1', overflow: 'hidden', minWidth: 0 }}
+            role="img"
+            aria-label={c.alt}
+          >
             <Photo
               base={c.base}
               sizes="(max-width: 900px) 68vw, 28vw"
@@ -94,6 +101,8 @@ export default function StoryCommitment() {
               style={{ width: '100%', height: '100%' }}
               imgStyle={{ width: '100%', height: '100%', objectFit: 'cover' }}
             />
+            {/* Soft brown wash ties the three crops together tonally */}
+            <div style={{ position: 'absolute', inset: 0, background: 'rgba(58,46,40,0.28)', pointerEvents: 'none' }} />
           </Reveal>
         ))}
       </div>

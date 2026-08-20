@@ -122,7 +122,7 @@ export default function Hero() {
         data-hero-image="1"
         style={{ minHeight: 640 }}
         role="img"
-        aria-label="Linen shirt in raking daylight against a plaster wall"
+        aria-label="A woman's embroidered linen shirt in warm afternoon light against a plaster wall"
       />
     </section>
   );
