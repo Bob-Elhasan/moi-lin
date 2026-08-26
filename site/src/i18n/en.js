@@ -64,8 +64,8 @@ export default {
     viewAll: 'View all',
     items: [
       { name: 'The Ivory Edit', descriptor: 'Essential Nile Delta shirting' },
-      { name: 'Cotton Quiet Blue', descriptor: 'Softened everyday pieces' },
-      { name: 'Silk Warm Neutrals', descriptor: 'Delta tones' },
+      { name: 'Quiet Blue', descriptor: 'Softened everyday pieces' },
+      { name: 'Warm Neutrals', descriptor: 'Delta tones' },
     ],
   },
 
@@ -189,7 +189,7 @@ export default {
   footer: {
     tagline: 'Made in Egypt. Designed for Europe.',
     columns: {
-      shop: { title: 'Shop', links: ['The collection', 'The Ivory Edit', 'Cotton Quiet Blue', 'Silk Warm Neutrals'] },
+      shop: { title: 'Shop', links: ['The collection', 'The Ivory Edit', 'Quiet Blue', 'Warm Neutrals'] },
       about: { title: 'About', links: ['The instinct', 'Egypt, 1998', 'The name', 'Our partners'] },
       care: { title: 'Customer care', links: ['Size guide', 'Shipping', 'Returns', 'Contact'] },
     },

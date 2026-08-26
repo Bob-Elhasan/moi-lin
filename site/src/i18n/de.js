@@ -66,8 +66,8 @@ export default {
     viewAll: 'Alles ansehen',
     items: [
       { name: 'The Ivory Edit', descriptor: 'Essentielle Hemden aus dem Nildelta' },
-      { name: 'Cotton Quiet Blue', descriptor: 'Weich gewaschene Alltagsstücke' },
-      { name: 'Silk Warm Neutrals', descriptor: 'Farbtöne des Deltas' },
+      { name: 'Quiet Blue', descriptor: 'Weich gewaschene Alltagsstücke' },
+      { name: 'Warm Neutrals', descriptor: 'Farbtöne des Deltas' },
     ],
   },
 
@@ -191,7 +191,7 @@ export default {
   footer: {
     tagline: 'Hergestellt in Ägypten. Entworfen für Europa.',
     columns: {
-      shop: { title: 'Shop', links: ['Die Kollektion', 'The Ivory Edit', 'Cotton Quiet Blue', 'Silk Warm Neutrals'] },
+      shop: { title: 'Shop', links: ['Die Kollektion', 'The Ivory Edit', 'Quiet Blue', 'Warm Neutrals'] },
       about: { title: 'Über uns', links: ['Der Instinkt', 'Ägypten, 1998', 'Der Name', 'Unsere Partner'] },
       care: { title: 'Kundenservice', links: ['Größentabelle', 'Versand', 'Rückgabe', 'Kontakt'] },
     },

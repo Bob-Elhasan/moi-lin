@@ -66,8 +66,8 @@ export default {
     viewAll: 'Tout voir',
     items: [
       { name: 'The Ivory Edit', descriptor: 'Chemises essentielles du delta du Nil' },
-      { name: 'Cotton Quiet Blue', descriptor: 'Pièces du quotidien adoucies' },
-      { name: 'Silk Warm Neutrals', descriptor: 'Teintes du delta' },
+      { name: 'Quiet Blue', descriptor: 'Pièces du quotidien adoucies' },
+      { name: 'Warm Neutrals', descriptor: 'Teintes du delta' },
     ],
   },
 
@@ -191,7 +191,7 @@ export default {
   footer: {
     tagline: "Fabriqué en Égypte. Conçu pour l'Europe.",
     columns: {
-      shop: { title: 'Boutique', links: ['La collection', 'The Ivory Edit', 'Cotton Quiet Blue', 'Silk Warm Neutrals'] },
+      shop: { title: 'Boutique', links: ['La collection', 'The Ivory Edit', 'Quiet Blue', 'Warm Neutrals'] },
       about: { title: 'À propos', links: ["L'instinct", 'Égypte, 1998', 'Le nom', 'Nos partenaires'] },
       care: { title: 'Service client', links: ['Guide des tailles', 'Livraison', 'Retours', 'Contact'] },
     },
