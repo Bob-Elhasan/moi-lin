@@ -1,6 +1,8 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { PRODUCTS } from '../data/products';
 import ProductCard from './ProductCard';
+import CarouselRail from './CarouselRail';
+import SectionLabel from './SectionLabel';
 import { useLanguage } from '../i18n/LanguageContext';
 
 export default function Collection() {
@@ -8,6 +10,7 @@ export default function Collection() {
   const [sort, setSort] = useState('featured');
   const [selectedColours, setSelectedColours] = useState({});
   const [openId, setOpenId] = useState(null);
+  const railRef = useRef(null);
 
   const products = useMemo(() => {
     const list = PRODUCTS.slice();
@@ -22,19 +25,7 @@ export default function Collection() {
   return (
     <>
       <section id="collection" data-pad="1" style={{ background: 'var(--ivory)', padding: '96px 80px 0' }}>
-        <p
-          style={{
-            fontFamily: 'var(--font-body)',
-            fontSize: 11,
-            fontWeight: 500,
-            letterSpacing: '0.14em',
-            textTransform: 'uppercase',
-            color: 'var(--camel)',
-            margin: '0 0 16px',
-          }}
-        >
-          {t.collection.eyebrow}
-        </p>
+        <SectionLabel style={{ margin: '0 0 16px' }}>{t.collection.eyebrow}</SectionLabel>
         <h2
           data-display-40="1"
           style={{ fontFamily: 'var(--font-display)', fontWeight: 400, fontSize: 40, lineHeight: 1.1, color: 'var(--chocolate)', margin: '0 0 24px' }}
@@ -70,6 +61,7 @@ export default function Collection() {
         <label style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 11, fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--ink-muted)' }}>
           {t.collection.sortLabel}
           <select
+            data-field="1"
             value={sort}
             onChange={(e) => {
               setSort(e.target.value);
@@ -96,7 +88,15 @@ export default function Collection() {
       </div>
 
       <section data-pad="1" style={{ background: 'var(--ivory)', padding: '40px 80px 96px' }}>
-        <div data-cols4="1" data-carousel="1" style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '24px 24px' }}>
+        <div
+          ref={railRef}
+          data-cols4="1"
+          data-carousel="1"
+          tabIndex={0}
+          role="group"
+          aria-label={t.collection.heading}
+          style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '24px 24px' }}
+        >
           {products.map((p) => (
             <ProductCard
               key={p.id}
@@ -108,6 +108,7 @@ export default function Collection() {
             />
           ))}
         </div>
+        <CarouselRail targetRef={railRef} style={{ marginTop: 20 }} />
 
         <div
           style={{

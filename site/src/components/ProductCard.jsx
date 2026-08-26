@@ -59,10 +59,13 @@ export default function ProductCard({ product, selectedColour, onSelectColour, o
 
   return (
     <div data-card="1" style={{ fontFamily: 'var(--font-body)', display: 'flex', flexDirection: 'column', gap: 12, minWidth: 0 }}>
+      {/* The image link carries only pictures, so it needs a name of its own —
+          without one it announces as its bare URL. */}
       <a
         href={href}
         target="_blank"
         rel="noreferrer"
+        aria-label={t.collection.onBodyLabel(name, t.colours[sel] || sel)}
         data-zoom-parent="1"
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
@@ -161,18 +164,23 @@ export default function ProductCard({ product, selectedColour, onSelectColour, o
         <button
           type="button"
           data-btn="1"
+          data-btn-ink="1"
           onClick={onToggleDetails}
           aria-expanded={open}
           style={{
+            '--btn-sweep': 'var(--chocolate)',
+            '--btn-ink': 'var(--ivory)',
+            flexShrink: 0,
             background: 'none',
             border: '1px solid var(--line)',
             color: 'var(--chocolate)',
             fontFamily: 'var(--font-body)',
             fontSize: 11,
             fontWeight: 600,
-            letterSpacing: '0.08em',
+            letterSpacing: 'var(--tracking-button)',
             textTransform: 'uppercase',
-            padding: '7px 12px',
+            padding: '9px 14px',
+            minHeight: 38,
             cursor: 'pointer',
           }}
         >

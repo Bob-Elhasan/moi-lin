@@ -1,7 +1,9 @@
 import { useLanguage } from '../i18n/LanguageContext';
 
-// The brand's four-cell credibility signature. Never animated, never iconified —
-// it borrows the reference sites' service-bar slot but carries proof instead.
+// The brand's credibility signature. Never animated, never iconified — it
+// borrows the reference sites' service-bar slot but carries proof instead.
+// Equal-width cells on desktop; full-width hairline-separated rows on mobile,
+// where an odd number of cells in a wrapping flex row would leave an orphan.
 export default function ProofBar({ surface = 'ecru' }) {
   const { t } = useLanguage();
   const isChoc = surface === 'chocolate';
@@ -9,6 +11,7 @@ export default function ProofBar({ surface = 'ecru' }) {
     <div style={{ borderBottom: isChoc ? 'none' : '1px solid var(--line)' }}>
       <div
         data-proof-row="1"
+        data-pad="1"
         style={{ display: 'flex', background: isChoc ? 'var(--chocolate)' : 'var(--ecru)', fontFamily: 'var(--font-body)' }}
       >
         {t.proof.map((c, i) => (
@@ -33,7 +36,10 @@ export default function ProofBar({ surface = 'ecru' }) {
             >
               {c.label}
             </div>
-            <div style={{ fontSize: 11, marginTop: 4, color: isChoc ? 'var(--ink-muted-on-chocolate)' : 'var(--ink-muted)' }}>
+            <div
+              data-proof-detail="1"
+              style={{ fontSize: 11, marginTop: 4, color: isChoc ? 'var(--ink-muted-on-chocolate)' : 'var(--ink-muted)' }}
+            >
               {c.detail}
             </div>
           </div>

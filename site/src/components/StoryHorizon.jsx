@@ -1,5 +1,7 @@
 import Reveal from './Reveal';
 import ParallaxPhoto from './ParallaxPhoto';
+import SectionLabel from './SectionLabel';
+import SplitLines from './SplitLines';
 import { useLanguage } from '../i18n/LanguageContext';
 
 export default function StoryHorizon() {
@@ -18,7 +20,7 @@ export default function StoryHorizon() {
         alignItems: 'center',
       }}
     >
-      <Reveal>
+      <Reveal variant="image">
         <ParallaxPhoto
           base="assets/images/horizon"
           sizes="(max-width: 900px) 100vw, 45vw"
@@ -27,22 +29,14 @@ export default function StoryHorizon() {
           aria-label="A European interior with Egyptian fabric"
         />
       </Reveal>
-      <Reveal>
-        <p
-          style={{
-            fontFamily: 'var(--font-body)',
-            fontSize: 11,
-            fontWeight: 500,
-            letterSpacing: '0.14em',
-            textTransform: 'uppercase',
-            color: 'var(--camel)',
-            margin: '0 0 24px',
-          }}
-        >
-          {t.horizon.eyebrow}
-        </p>
-        <h2
+
+      <div>
+        <SectionLabel onChocolate>{t.horizon.eyebrow}</SectionLabel>
+        <SplitLines
+          as="h2"
           data-display-64="1"
+          text={t.horizon.headline}
+          delay={80}
           style={{
             fontFamily: 'var(--font-display)',
             fontWeight: 400,
@@ -53,10 +47,10 @@ export default function StoryHorizon() {
             maxWidth: '24ch',
             textWrap: 'pretty',
           }}
-        >
-          {t.horizon.headline}
-        </h2>
-        <p
+        />
+        <Reveal
+          as="p"
+          delay={220}
           style={{
             fontFamily: 'var(--font-body)',
             fontSize: 15,
@@ -68,8 +62,10 @@ export default function StoryHorizon() {
           }}
         >
           {t.horizon.body}
-        </p>
-        <p
+        </Reveal>
+        <Reveal
+          as="p"
+          delay={320}
           style={{
             fontFamily: 'var(--font-display)',
             fontStyle: 'italic',
@@ -82,8 +78,8 @@ export default function StoryHorizon() {
           }}
         >
           {t.horizon.quiet}
-        </p>
-      </Reveal>
+        </Reveal>
+      </div>
     </section>
   );
 }

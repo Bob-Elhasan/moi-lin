@@ -1,35 +1,32 @@
+import { useRef } from 'react';
 import Reveal from './Reveal';
 import ParallaxPhoto from './ParallaxPhoto';
 import Photo from './Photo';
+import SectionLabel from './SectionLabel';
+import SplitLines from './SplitLines';
+import CarouselRail from './CarouselRail';
 import { useLanguage } from '../i18n/LanguageContext';
 
 const CROPS = [
-  { base: 'assets/images/commitment-crop-1', alt: 'A hand gathering harvested flax stalks in the field' },
+  { base: 'assets/images/commitment-crop-1', alt: 'A silk cardigan seam and woven MOi & LiN label, close up' },
   { base: 'assets/images/commitment-crop-2', alt: 'Detail of selvedge and buttonhole stitching' },
-  { base: 'assets/images/commitment-crop-3', alt: 'A weaving workshop, looms and spun yarn' },
+  { base: 'assets/images/commitment-crop-3', alt: 'A sewing machine embroidering the MOi & LiN monogram' },
 ];
 
 export default function StoryCommitment() {
   const { t } = useLanguage();
+  const railRef = useRef(null);
+
   return (
     <section data-story="1" data-pad="1" style={{ background: 'var(--chocolate)', padding: '144px 80px' }}>
       <div data-split="1" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
-        <Reveal>
-          <p
-            style={{
-              fontFamily: 'var(--font-body)',
-              fontSize: 11,
-              fontWeight: 500,
-              letterSpacing: '0.14em',
-              textTransform: 'uppercase',
-              color: 'var(--camel)',
-              margin: '0 0 24px',
-            }}
-          >
-            {t.commitment.eyebrow}
-          </p>
-          <h2
+        <div>
+          <SectionLabel onChocolate>{t.commitment.eyebrow}</SectionLabel>
+          <SplitLines
+            as="h2"
             data-display-64="1"
+            text={t.commitment.headline}
+            delay={80}
             style={{
               fontFamily: 'var(--font-display)',
               fontWeight: 400,
@@ -40,10 +37,10 @@ export default function StoryCommitment() {
               maxWidth: '24ch',
               textWrap: 'pretty',
             }}
-          >
-            {t.commitment.headline}
-          </h2>
-          <p
+          />
+          <Reveal
+            as="p"
+            delay={220}
             style={{
               fontFamily: 'var(--font-body)',
               fontSize: 15,
@@ -55,8 +52,10 @@ export default function StoryCommitment() {
             }}
           >
             {t.commitment.body}
-          </p>
-          <p
+          </Reveal>
+          <Reveal
+            as="p"
+            delay={320}
             style={{
               fontFamily: 'var(--font-display)',
               fontStyle: 'italic',
@@ -69,9 +68,9 @@ export default function StoryCommitment() {
             }}
           >
             {t.commitment.quiet}
-          </p>
-        </Reveal>
-        <Reveal>
+          </Reveal>
+        </div>
+        <Reveal variant="image">
           <ParallaxPhoto
             base="assets/images/commitment-main"
             sizes="(max-width: 900px) 100vw, 45vw"
@@ -84,10 +83,19 @@ export default function StoryCommitment() {
 
       {/* Grid on desktop; a swipeable carousel on mobile (data-carousel="tight")
           rather than three full-width squares stacked one under another. */}
-      <div data-cols3="1" data-carousel="tight" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 24, marginTop: 64 }}>
+      <div
+        ref={railRef}
+        data-cols3="1"
+        data-carousel="tight"
+        tabIndex={0}
+        role="group"
+        aria-label={t.commitment.eyebrow}
+        style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 24, marginTop: 64 }}
+      >
         {CROPS.map((c, i) => (
           <Reveal
             key={c.base}
+            variant="image"
             delay={i * 120}
             data-zoom-parent="1"
             style={{ position: 'relative', aspectRatio: '1/1', overflow: 'hidden', minWidth: 0 }}
@@ -106,6 +114,7 @@ export default function StoryCommitment() {
           </Reveal>
         ))}
       </div>
+      <CarouselRail targetRef={railRef} onChocolate style={{ marginTop: 20 }} />
     </section>
   );
 }

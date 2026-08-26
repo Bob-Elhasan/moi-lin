@@ -16,13 +16,15 @@ export default function Footer() {
       <div data-cols4="1" style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr 1fr', gap: 40 }}>
         <div>
           {/* Logo-White.png carries ~11% transparent padding on every edge
-              around the wordmark; cancel the left/right padding at this
-              display height so the glyph's true edge lines up with the
-              tagline below rather than the image's edge. */}
+              around the wordmark; cancel the left/right padding so the glyph's
+              true edge lines up with the tagline below rather than the image's
+              edge. The offset is a fixed ratio of the display height, so it
+              stays correct when --logo-h shrinks on small screens. */}
           <img
+            data-footer-logo="1"
             src="assets/logos/Logo-White.png"
             alt="MOi & LiN"
-            style={{ height: 64, width: 'auto', display: 'block', marginBottom: 16, marginLeft: 'calc(64px * -121 / 375)', marginRight: 'calc(64px * -121 / 375)' }}
+            style={{ display: 'block', marginBottom: 16 }}
           />
           <p style={{ fontFamily: 'var(--font-display)', fontStyle: 'italic', fontSize: 17, color: 'var(--ivory)', margin: 0 }}>
             {t.footer.tagline}

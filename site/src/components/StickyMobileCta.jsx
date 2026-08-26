@@ -15,6 +15,9 @@ export default function StickyMobileCta({ visible }) {
       data-mobile-only="1"
       data-sticky-cta="1"
       aria-hidden={!shown}
+      // inert keeps the hidden bar out of the tab order entirely — aria-hidden
+      // alone would leave a focusable link inside a hidden region
+      inert={!shown}
       style={{
         position: 'fixed',
         left: 0,
@@ -35,7 +38,10 @@ export default function StickyMobileCta({ visible }) {
       <a
         href="#collection"
         data-btn="1"
+        data-btn-ink="1"
         style={{
+          '--btn-sweep': 'var(--camel)',
+          '--btn-ink': 'var(--ivory)',
           flex: 1,
           textAlign: 'center',
           textDecoration: 'none',
@@ -43,9 +49,13 @@ export default function StickyMobileCta({ visible }) {
           color: 'var(--chocolate)',
           fontWeight: 700,
           fontSize: 13,
-          letterSpacing: '0.08em',
+          letterSpacing: 'var(--tracking-button)',
           textTransform: 'uppercase',
-          padding: '14px 16px',
+          padding: '15px 16px',
+          minHeight: 48,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
         {t.stickyCta.label}
@@ -64,10 +74,12 @@ export default function StickyMobileCta({ visible }) {
           fontFamily: 'var(--font-body)',
           fontSize: 11,
           fontWeight: 600,
-          letterSpacing: '0.08em',
+          letterSpacing: 'var(--tracking-button)',
           textTransform: 'uppercase',
-          padding: '13px 14px',
+          padding: '13px 16px',
+          minHeight: 48,
           cursor: 'pointer',
+          transition: 'background-color var(--dur-quick) var(--ease), border-color var(--dur-quick) var(--ease)',
         }}
       >
         {t.stickyCta.dismiss}

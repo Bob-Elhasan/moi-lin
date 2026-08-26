@@ -12,6 +12,9 @@ export default {
     menu: 'Menü',
     close: 'Schließen',
     sizeGuide: 'Größentabelle',
+    categoriesLabel: 'Kategorien',
+    home: 'MOi & LiN — zurück nach oben',
+    skipToContent: 'Zum Inhalt springen',
   },
 
   announcement: 'Kostenloser Versand in Europa ab 150 €',
@@ -19,7 +22,7 @@ export default {
   hero: {
     eyebrow: 'Ägypten 1998 · Jetzt in Europa',
     headline: 'Auf der Haut getragen. Eingewebt in das, was Sie sind.',
-    editorial: 'Ägyptisches Leinen. Dreißig Jahre in der Entstehung.',
+    editorial: 'Textil aus dem Nildelta. Dreißig Jahre in der Entstehung.',
     body: 'Die Qualität eines Stoffes spürt man, bevor man sie sieht. Wir haben alles auf dieser einen Überzeugung aufgebaut, seit dem ersten Raum in Ägypten.',
     primaryCta: 'Die Geschichte lesen',
     secondaryCta: 'Zur Kollektion',
@@ -28,7 +31,7 @@ export default {
   proof: [
     { label: '1998', detail: 'Erste Tür in Ägypten' },
     { label: 'Über 100 Handwerker', detail: 'In unserer eigenen Fertigung' },
-    { label: 'Leinen aus dem Nildelta', detail: 'Seit fünftausend Jahren angebaut' },
+    { label: 'Textil aus dem Nildelta', detail: 'Seit fünftausend Jahren gefertigt' },
   ],
 
   instinct: {
@@ -42,7 +45,7 @@ export default {
     eyebrow: 'Das Versprechen',
     headline: 'Ägypten, 1998. Ein Raum, ein Standard.',
     body: 'Dass jeder, der durch diese Tür trat, Kleidung verdiente, die mit voller Materialintegrität gefertigt wurde.',
-    quiet: 'Dieser Standard wuchs. Eine Fertigung mit über hundert geschickten Händen. Eine Lieferkette, verwurzelt im Nildelta, wo Leinen seit fünftausend Jahren angebaut wird. Jedes Stück, das unser Haus verließ, trug dieselbe Überzeugung wie das erste.',
+    quiet: 'Dieser Standard wuchs. Eine Fertigung mit über hundert geschickten Händen. Eine Lieferkette, verwurzelt im Nildelta, wo Textil seit fünftausend Jahren gefertigt wird — Flachs, Baumwolle, Seide, jedes mit derselben Hand bearbeitet. Jedes Stück, das unser Haus verließ, trug dieselbe Überzeugung wie das erste.',
   },
 
   name: {
@@ -52,9 +55,9 @@ export default {
     moiWord: 'Ich selbst.',
     moiBody: 'Das Wort, das der Nähe vorbehalten ist, jener Version von Ihnen, die zum Vorschein kommt, wenn Sie ganz bei sich sind.',
     linPrefix: '',
-    linSuffix: ', vom lateinischen linum.',
-    linWord: 'Leinen.',
-    linBody: 'Geboren im Nildelta, getragen über Zivilisationen hinweg, von Menschen getragen, die verstanden, dass Raffinesse, in ihrer beständigsten Form, aus der Erde wächst.',
+    linSuffix: ', vom lateinischen linum — der Faden.',
+    linWord: 'Faden.',
+    linBody: 'Geboren im Nildelta als Flachs, getragen über Zivilisationen hinweg. Heute verläuft derselbe Faden ebenso durch Baumwolle und Seide wie durch Leinen, getragen von Menschen, die verstanden, dass Raffinesse, in ihrer beständigsten Form, aus der Erde wächst.',
     closing: 'Der Mensch, und der Stoff, der für ihn gemacht wurde. Ein Kleidungsstück, das sich nicht ankündigt.',
   },
 
@@ -62,9 +65,9 @@ export default {
     heading: 'Drei Wege, um anzufangen',
     viewAll: 'Alles ansehen',
     items: [
-      { name: 'The Ivory Edit', descriptor: 'Essentielle Leinenhemden' },
-      { name: 'Quiet Blue', descriptor: 'Weich gewaschene Alltagsstücke' },
-      { name: 'Warm Neutrals', descriptor: 'Farbtöne des Deltas' },
+      { name: 'The Ivory Edit', descriptor: 'Essentielle Hemden aus dem Nildelta' },
+      { name: 'Cotton Quiet Blue', descriptor: 'Weich gewaschene Alltagsstücke' },
+      { name: 'Silk Warm Neutrals', descriptor: 'Farbtöne des Deltas' },
     ],
   },
 
@@ -99,7 +102,7 @@ export default {
   service: ['Kostenloser Versand in Europa ab 150 €', '30 Tage Rückgaberecht', 'Hergestellt in Ägypten', 'Sichere Zahlung über den Händler'],
 
   collection: {
-    eyebrow: 'Leinenhemden für Damen',
+    eyebrow: 'Hemden aus dem Nildelta für Damen',
     heading: 'Gemacht, um getragen zu werden. Geliebt für Jahre.',
     productCount: (n) => `${n} ${n === 1 ? 'Produkt' : 'Produkte'}`,
     sortLabel: 'Sortieren',
@@ -151,7 +154,7 @@ export default {
       },
     },
     'soft-camel': {
-      name: 'Weiches Leinenhemd in Kamel',
+      name: 'Weiches Hemd in Kamel',
       details: {
         Composition: '100 % ägyptisches Leinen, nach der Konfektion gewaschen',
         Weight: '175 g/m², mittleres Gewicht',
@@ -188,7 +191,7 @@ export default {
   footer: {
     tagline: 'Hergestellt in Ägypten. Entworfen für Europa.',
     columns: {
-      shop: { title: 'Shop', links: ['Die Kollektion', 'The Ivory Edit', 'Quiet Blue', 'Warm Neutrals'] },
+      shop: { title: 'Shop', links: ['Die Kollektion', 'The Ivory Edit', 'Cotton Quiet Blue', 'Silk Warm Neutrals'] },
       about: { title: 'Über uns', links: ['Der Instinkt', 'Ägypten, 1998', 'Der Name', 'Unsere Partner'] },
       care: { title: 'Kundenservice', links: ['Größentabelle', 'Versand', 'Rückgabe', 'Kontakt'] },
     },

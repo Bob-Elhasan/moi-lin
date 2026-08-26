@@ -1,5 +1,7 @@
 import Reveal from './Reveal';
 import ParallaxPhoto from './ParallaxPhoto';
+import SectionLabel from './SectionLabel';
+import SplitLines from './SplitLines';
 import { useLanguage } from '../i18n/LanguageContext';
 
 export default function StoryInstinct() {
@@ -19,7 +21,7 @@ export default function StoryInstinct() {
         alignItems: 'center',
       }}
     >
-      <Reveal>
+      <Reveal variant="image">
         <ParallaxPhoto
           base="assets/images/instinct"
           sizes="(max-width: 900px) 100vw, 45vw"
@@ -30,22 +32,16 @@ export default function StoryInstinct() {
           aria-label="Archival early 1990s European fashion backstage photograph"
         />
       </Reveal>
-      <Reveal>
-        <p
-          style={{
-            fontFamily: 'var(--font-body)',
-            fontSize: 11,
-            fontWeight: 500,
-            letterSpacing: '0.14em',
-            textTransform: 'uppercase',
-            color: 'var(--camel)',
-            margin: '0 0 24px',
-          }}
-        >
-          {t.instinct.eyebrow}
-        </p>
-        <h2
+
+      {/* The copy column arrives in sequence rather than as one block: thread,
+          headline lines, body, closing note. Same order the eye reads it. */}
+      <div>
+        <SectionLabel>{t.instinct.eyebrow}</SectionLabel>
+        <SplitLines
+          as="h2"
           data-display-64="1"
+          text={t.instinct.headline}
+          delay={80}
           style={{
             fontFamily: 'var(--font-display)',
             fontWeight: 400,
@@ -56,10 +52,10 @@ export default function StoryInstinct() {
             maxWidth: '26ch',
             textWrap: 'pretty',
           }}
-        >
-          {t.instinct.headline}
-        </h2>
-        <p
+        />
+        <Reveal
+          as="p"
+          delay={220}
           style={{
             fontFamily: 'var(--font-body)',
             fontSize: 15,
@@ -71,8 +67,10 @@ export default function StoryInstinct() {
           }}
         >
           {t.instinct.body}
-        </p>
-        <p
+        </Reveal>
+        <Reveal
+          as="p"
+          delay={320}
           style={{
             fontFamily: 'var(--font-display)',
             fontStyle: 'italic',
@@ -85,8 +83,8 @@ export default function StoryInstinct() {
           }}
         >
           {t.instinct.quiet}
-        </p>
-      </Reveal>
+        </Reveal>
+      </div>
     </section>
   );
 }

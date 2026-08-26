@@ -1,5 +1,7 @@
+import { useRef } from 'react';
 import { useLanguage } from '../i18n/LanguageContext';
 import Photo from './Photo';
+import CarouselRail from './CarouselRail';
 
 const BACKGROUNDS = ['var(--dusty-blue)', '#94A7B4', '#CDB08A'];
 // Real photography where it exists (manifest base path); the flat
@@ -65,9 +67,11 @@ function CategoryTile({ name, descriptor, background, image }) {
 // On mobile the row becomes a swipeable carousel instead of a 2-up grid.
 export default function CategoryTiles() {
   const { t } = useLanguage();
+  const railRef = useRef(null);
   return (
     <section data-pad="1" style={{ background: 'var(--ivory)', padding: '96px 80px' }}>
       <div
+        data-section-head="1"
         style={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -83,15 +87,24 @@ export default function CategoryTiles() {
         >
           {t.tiles.heading}
         </h2>
-        <a href="#collection" data-underline="1" style={{ color: 'var(--camel)', fontFamily: 'var(--font-body)', fontWeight: 500 }}>
+        <a href="#collection" data-underline="1" data-tap="1" style={{ color: 'var(--camel)', fontFamily: 'var(--font-body)', fontWeight: 500 }}>
           {t.tiles.viewAll}
         </a>
       </div>
-      <div data-cols3="1" data-carousel="1" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 24 }}>
+      <div
+        ref={railRef}
+        data-cols3="1"
+        data-carousel="1"
+        tabIndex={0}
+        role="group"
+        aria-label={t.tiles.heading}
+        style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 24 }}
+      >
         {t.tiles.items.map((tile, i) => (
           <CategoryTile key={tile.name} {...tile} background={BACKGROUNDS[i]} image={IMAGES[i]} />
         ))}
       </div>
+      <CarouselRail targetRef={railRef} style={{ marginTop: 20 }} />
     </section>
   );
 }

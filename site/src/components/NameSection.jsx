@@ -1,4 +1,7 @@
 import Reveal from './Reveal';
+import SectionLabel from './SectionLabel';
+import SplitLines from './SplitLines';
+import ThreadRule from './ThreadRule';
 import { useLanguage } from '../i18n/LanguageContext';
 
 // Word-glyphs from the logo lockup, used inline in place of styled text
@@ -23,21 +26,9 @@ export default function NameSection() {
   const { t } = useLanguage();
   return (
     <section data-story="1" data-pad="1" style={{ background: 'var(--ecru)', padding: '144px 80px' }}>
-      <Reveal style={{ maxWidth: '60ch', margin: '0 auto', textAlign: 'center' }}>
-        <p
-          style={{
-            fontFamily: 'var(--font-body)',
-            fontSize: 11,
-            fontWeight: 500,
-            letterSpacing: '0.14em',
-            textTransform: 'uppercase',
-            color: 'var(--camel)',
-            margin: '0 0 40px',
-          }}
-        >
-          {t.name.eyebrow}
-        </p>
+      <SectionLabel style={{ justifyContent: 'center', margin: '0 0 40px' }}>{t.name.eyebrow}</SectionLabel>
 
+      <Reveal style={{ maxWidth: '60ch', margin: '0 auto', textAlign: 'center' }}>
         <p
           style={{
             fontFamily: 'var(--font-display)',
@@ -79,12 +70,14 @@ export default function NameSection() {
         </p>
       </Reveal>
 
-      <Reveal style={{ maxWidth: '900px', margin: '96px auto 0', textAlign: 'center' }}>
-        <div
-          aria-hidden="true"
-          style={{ width: 40, height: 1, background: 'var(--camel)', margin: '0 auto 40px' }}
-        />
-        <p
+      <div style={{ maxWidth: '900px', margin: '96px auto 0', textAlign: 'center' }}>
+        <ThreadRule width={40} style={{ margin: '0 auto 40px' }} />
+        <SplitLines
+          as="p"
+          data-display-40="1"
+          text={t.name.closing}
+          delay={120}
+          stagger={110}
           style={{
             fontFamily: 'var(--font-display)',
             fontStyle: 'italic',
@@ -95,10 +88,8 @@ export default function NameSection() {
             margin: 0,
             textWrap: 'pretty',
           }}
-        >
-          {t.name.closing}
-        </p>
-      </Reveal>
+        />
+      </div>
     </section>
   );
 }

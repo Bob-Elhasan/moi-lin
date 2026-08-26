@@ -1,4 +1,6 @@
 import Reveal from './Reveal';
+import SplitLines from './SplitLines';
+import ThreadRule from './ThreadRule';
 import { useLanguage } from '../i18n/LanguageContext';
 
 export default function Pillars() {
@@ -6,9 +8,12 @@ export default function Pillars() {
   const items = t.pillars.items;
   return (
     <section data-story="1" data-pad="1" style={{ background: 'var(--ecru)', padding: '144px 80px' }}>
-      <Reveal
+      <ThreadRule style={{ marginBottom: 24 }} />
+      <SplitLines
         as="h2"
         data-display-64="1"
+        text={t.pillars.heading}
+        delay={80}
         style={{
           fontFamily: 'var(--font-display)',
           fontWeight: 400,
@@ -19,9 +24,7 @@ export default function Pillars() {
           maxWidth: '32ch',
           textWrap: 'pretty',
         }}
-      >
-        {t.pillars.heading}
-      </Reveal>
+      />
       <div data-cols3="1" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 0 }}>
         {items.map((p, i) => (
           <Reveal

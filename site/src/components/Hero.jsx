@@ -28,12 +28,18 @@ export default function Hero() {
           fontFamily: 'var(--font-body)',
         }}
       >
-        <p
-          data-hero-in="1"
-          style={{ ...heroIn(0), fontSize: 11, fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--camel)', margin: '0 0 24px' }}
-        >
-          {t.hero.eyebrow}
-        </p>
+        {/* The same thread-and-label opener every story section uses, here on
+            a mount timeline rather than a scroll one — it is already in view. */}
+        <div data-hero-in="1" style={{ ...heroIn(0), display: 'flex', alignItems: 'center', gap: 16, margin: '0 0 24px' }}>
+          <span
+            data-hero-thread="1"
+            aria-hidden="true"
+            style={{ ...heroIn(260), display: 'block', width: 56, height: 1, background: 'var(--camel)', flexShrink: 0 }}
+          />
+          <p style={{ fontSize: 11, fontWeight: 500, letterSpacing: 'var(--tracking-label)', textTransform: 'uppercase', color: 'var(--camel)', margin: 0 }}>
+            {t.hero.eyebrow}
+          </p>
+        </div>
 
         <h1
           data-display-88="1"
@@ -81,11 +87,12 @@ export default function Hero() {
             href="#story"
             data-btn="1"
             style={{
+              '--btn-sweep': 'var(--camel)',
               textDecoration: 'none',
               fontFamily: 'var(--font-body)',
               fontWeight: 700,
               fontSize: 13,
-              letterSpacing: '0.08em',
+              letterSpacing: 'var(--tracking-button)',
               textTransform: 'uppercase',
               background: 'var(--chocolate)',
               color: 'var(--ivory)',
@@ -97,12 +104,15 @@ export default function Hero() {
           <a
             href="#collection"
             data-btn="1"
+            data-btn-ink="1"
             style={{
+              '--btn-sweep': 'var(--camel)',
+              '--btn-ink': 'var(--ivory)',
               textDecoration: 'none',
               fontFamily: 'var(--font-body)',
               fontWeight: 700,
               fontSize: 13,
-              letterSpacing: '0.08em',
+              letterSpacing: 'var(--tracking-button)',
               textTransform: 'uppercase',
               color: 'var(--camel)',
               border: '1px solid var(--camel)',
@@ -122,7 +132,7 @@ export default function Hero() {
         data-hero-image="1"
         style={{ minHeight: 640 }}
         role="img"
-        aria-label="A woman's embroidered linen shirt in warm afternoon light against a plaster wall"
+        aria-label="A woman's embroidered shirt in warm afternoon light against a plaster wall"
       />
     </section>
   );

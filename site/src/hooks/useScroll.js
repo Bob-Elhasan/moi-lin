@@ -6,10 +6,14 @@ import { useEffect, useState } from 'react';
 export function useScrollState() {
   const [condensed, setCondensed] = useState(false);
   const [pastGrid, setPastGrid] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const onScroll = () => {
       setCondensed(window.scrollY > 40);
+
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(scrollable > 0 ? Math.min(1, Math.max(0, window.scrollY / scrollable)) : 0);
 
       const grid = document.getElementById('collection');
       const foot = document.querySelector('footer');
@@ -24,5 +28,5 @@ export function useScrollState() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  return { condensed, pastGrid };
+  return { condensed, pastGrid, progress };
 }

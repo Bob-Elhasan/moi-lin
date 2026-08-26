@@ -10,6 +10,9 @@ export default {
     menu: 'Menu',
     close: 'Close',
     sizeGuide: 'Size guide',
+    categoriesLabel: 'Categories',
+    home: 'MOi & LiN — back to top',
+    skipToContent: 'Skip to content',
   },
 
   announcement: 'Free European shipping over €150',
@@ -17,7 +20,7 @@ export default {
   hero: {
     eyebrow: 'Egypt 1998 · Now in Europe',
     headline: 'Worn into the skin. Woven into who you are.',
-    editorial: 'Egyptian linen. Thirty years in the making.',
+    editorial: 'Nile Delta textile. Thirty years in the making.',
     body: 'The quality of a fabric is felt before it is seen. We have built everything on that one conviction since the first room in Egypt.',
     primaryCta: 'Read the story',
     secondaryCta: 'Shop the collection',
@@ -26,7 +29,7 @@ export default {
   proof: [
     { label: '1998', detail: 'First door in Egypt' },
     { label: '100+ craftspeople', detail: 'In our own manufacturing' },
-    { label: 'Nile Delta linen', detail: 'Cultivated for five thousand years' },
+    { label: 'Nile Delta textile', detail: 'Crafted for five thousand years' },
   ],
 
   instinct: {
@@ -40,7 +43,7 @@ export default {
     eyebrow: 'The commitment',
     headline: 'Egypt, 1998. One room, one standard.',
     body: 'That everyone who walked through the door deserved clothes made with full material integrity.',
-    quiet: 'That standard grew. A manufacturing operation of over a hundred skilled hands. A supply chain rooted in the Nile Delta, where linen has been cultivated for five thousand years. Every piece that left carried the same conviction as the first.',
+    quiet: 'That standard grew. A manufacturing operation of over a hundred skilled hands. A supply chain rooted in the Nile Delta, where textile has been crafted for five thousand years — flax, cotton, silk, each worked with the same hand. Every piece that left carried the same conviction as the first.',
   },
 
   name: {
@@ -50,9 +53,9 @@ export default {
     moiWord: 'Myself.',
     moiBody: 'The word reserved for closeness, for the version of you that surfaces when you are entirely at ease.',
     linPrefix: '',
-    linSuffix: ', from the Latin linum.',
-    linWord: 'Linen.',
-    linBody: 'Born in the Nile Delta, carried across civilisations, worn by people who understood that refinement, at its most enduring, is grown from the earth.',
+    linSuffix: ', from the Latin linum — thread.',
+    linWord: 'Thread.',
+    linBody: 'Born in the Nile Delta as flax, carried across civilisations. Today that same thread runs through cotton and silk as much as linen, worn by people who understood that refinement, at its most enduring, is grown from the earth.',
     closing: 'The person, and the fabric made for them. A garment that does not announce itself.',
   },
 
@@ -60,9 +63,9 @@ export default {
     heading: 'Three ways to begin',
     viewAll: 'View all',
     items: [
-      { name: 'The Ivory Edit', descriptor: 'Essential linen shirting' },
-      { name: 'Quiet Blue', descriptor: 'Softened everyday pieces' },
-      { name: 'Warm Neutrals', descriptor: 'Delta tones' },
+      { name: 'The Ivory Edit', descriptor: 'Essential Nile Delta shirting' },
+      { name: 'Cotton Quiet Blue', descriptor: 'Softened everyday pieces' },
+      { name: 'Silk Warm Neutrals', descriptor: 'Delta tones' },
     ],
   },
 
@@ -97,7 +100,7 @@ export default {
   service: ['Free European shipping over €150', '30-day returns', 'Made in Egypt', 'Secure payment via retailer'],
 
   collection: {
-    eyebrow: "Women's linen shirting",
+    eyebrow: "Women's Nile Delta shirting",
     heading: 'Made to be worn. Loved for years.',
     productCount: (n) => `${n} ${n === 1 ? 'product' : 'products'}`,
     sortLabel: 'Sort',
@@ -149,7 +152,7 @@ export default {
       },
     },
     'soft-camel': {
-      name: 'Soft Camel Linen Shirt',
+      name: 'Soft Camel Shirt',
       details: {
         Composition: '100% Egyptian linen, garment washed',
         Weight: '175 gsm, mid-weight',
@@ -186,7 +189,7 @@ export default {
   footer: {
     tagline: 'Made in Egypt. Designed for Europe.',
     columns: {
-      shop: { title: 'Shop', links: ['The collection', 'The Ivory Edit', 'Quiet Blue', 'Warm Neutrals'] },
+      shop: { title: 'Shop', links: ['The collection', 'The Ivory Edit', 'Cotton Quiet Blue', 'Silk Warm Neutrals'] },
       about: { title: 'About', links: ['The instinct', 'Egypt, 1998', 'The name', 'Our partners'] },
       care: { title: 'Customer care', links: ['Size guide', 'Shipping', 'Returns', 'Contact'] },
     },

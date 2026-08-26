@@ -12,6 +12,9 @@ export default {
     menu: 'Menu',
     close: 'Fermer',
     sizeGuide: 'Guide des tailles',
+    categoriesLabel: 'Catégories',
+    home: 'MOi & LiN — retour en haut',
+    skipToContent: 'Aller au contenu',
   },
 
   announcement: 'Livraison gratuite en Europe dès 150 €',
@@ -19,7 +22,7 @@ export default {
   hero: {
     eyebrow: 'Égypte 1998 · Désormais en Europe',
     headline: 'Porté à même la peau. Tissé dans ce que vous êtes.',
-    editorial: 'Lin égyptien. Trente ans de fabrication.',
+    editorial: 'Textile du delta du Nil. Trente ans de fabrication.',
     body: "On sent la qualité d'un tissu avant de la voir. Nous avons tout construit sur cette seule conviction depuis la première pièce, en Égypte.",
     primaryCta: "Découvrir l'histoire",
     secondaryCta: 'Voir la collection',
@@ -28,7 +31,7 @@ export default {
   proof: [
     { label: '1998', detail: 'Première porte ouverte en Égypte' },
     { label: 'Plus de 100 artisans', detail: 'Au sein de notre propre production' },
-    { label: 'Lin du delta du Nil', detail: 'Cultivé depuis cinq mille ans' },
+    { label: 'Textile du delta du Nil', detail: 'Façonné depuis cinq mille ans' },
   ],
 
   instinct: {
@@ -42,7 +45,7 @@ export default {
     eyebrow: "L'engagement",
     headline: 'Égypte, 1998. Une pièce, une exigence.',
     body: "Que quiconque franchissait cette porte méritait des vêtements faits avec une entière intégrité de matière.",
-    quiet: "Cette exigence a grandi. Une production réunissant plus de cent mains expertes. Une chaîne d'approvisionnement enracinée dans le delta du Nil, où le lin est cultivé depuis cinq mille ans. Chaque pièce sortie de nos ateliers a porté la même conviction que la première.",
+    quiet: "Cette exigence a grandi. Une production réunissant plus de cent mains expertes. Une chaîne d'approvisionnement enracinée dans le delta du Nil, où le textile est façonné depuis cinq mille ans — lin, coton, soie, chacun travaillé de la même main. Chaque pièce sortie de nos ateliers a porté la même conviction que la première.",
   },
 
   name: {
@@ -52,9 +55,9 @@ export default {
     moiWord: 'Moi-même.',
     moiBody: "Le mot réservé à la proximité, à la version de vous qui apparaît quand vous êtes entièrement à l'aise.",
     linPrefix: '',
-    linSuffix: ', du latin linum.',
-    linWord: 'Le lin.',
-    linBody: "Né dans le delta du Nil, porté à travers les civilisations, choisi par ceux qui ont compris que le raffinement, dans ce qu'il a de plus authentique, naît de la terre.",
+    linSuffix: ', du latin linum — le fil.',
+    linWord: 'Le fil.',
+    linBody: "Né dans le delta du Nil sous forme de lin, porté à travers les civilisations. Aujourd'hui, ce même fil traverse le coton et la soie autant que le lin, choisi par ceux qui ont compris que le raffinement, dans ce qu'il a de plus authentique, naît de la terre.",
     closing: "La personne, et le tissu fait pour elle. Un vêtement qui ne s'annonce pas.",
   },
 
@@ -62,9 +65,9 @@ export default {
     heading: 'Trois façons de commencer',
     viewAll: 'Tout voir',
     items: [
-      { name: 'The Ivory Edit', descriptor: 'Chemises en lin essentielles' },
-      { name: 'Quiet Blue', descriptor: 'Pièces du quotidien adoucies' },
-      { name: 'Warm Neutrals', descriptor: 'Teintes du delta' },
+      { name: 'The Ivory Edit', descriptor: 'Chemises essentielles du delta du Nil' },
+      { name: 'Cotton Quiet Blue', descriptor: 'Pièces du quotidien adoucies' },
+      { name: 'Silk Warm Neutrals', descriptor: 'Teintes du delta' },
     ],
   },
 
@@ -99,7 +102,7 @@ export default {
   service: ['Livraison gratuite en Europe dès 150 €', 'Retours sous 30 jours', 'Fabriqué en Égypte', 'Paiement sécurisé via le revendeur'],
 
   collection: {
-    eyebrow: 'Chemises en lin pour femme',
+    eyebrow: 'Chemises du delta du Nil pour femme',
     heading: 'Fait pour être porté. Aimé pendant des années.',
     productCount: (n) => `${n} ${n === 1 ? 'produit' : 'produits'}`,
     sortLabel: 'Trier',
@@ -151,7 +154,7 @@ export default {
       },
     },
     'soft-camel': {
-      name: 'Chemise en Lin Camel Doux',
+      name: 'Chemise Camel Doux',
       details: {
         Composition: '100 % lin égyptien, délavé après confection',
         Weight: '175 g/m², poids moyen',
@@ -188,7 +191,7 @@ export default {
   footer: {
     tagline: "Fabriqué en Égypte. Conçu pour l'Europe.",
     columns: {
-      shop: { title: 'Boutique', links: ['La collection', 'The Ivory Edit', 'Quiet Blue', 'Warm Neutrals'] },
+      shop: { title: 'Boutique', links: ['La collection', 'The Ivory Edit', 'Cotton Quiet Blue', 'Silk Warm Neutrals'] },
       about: { title: 'À propos', links: ["L'instinct", 'Égypte, 1998', 'Le nom', 'Nos partenaires'] },
       care: { title: 'Service client', links: ['Guide des tailles', 'Livraison', 'Retours', 'Contact'] },
     },

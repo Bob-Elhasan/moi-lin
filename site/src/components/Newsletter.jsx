@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Reveal from './Reveal';
+import SplitLines from './SplitLines';
 import { useLanguage } from '../i18n/LanguageContext';
 
 export default function Newsletter() {
@@ -21,9 +22,11 @@ export default function Newsletter() {
         alignItems: 'center',
       }}
     >
-      <Reveal>
-        <h2
+      <div>
+        <SplitLines
+          as="h2"
           data-display-64="1"
+          text={t.newsletter.headline}
           style={{
             fontFamily: 'var(--font-display)',
             fontWeight: 400,
@@ -34,10 +37,10 @@ export default function Newsletter() {
             maxWidth: '26ch',
             textWrap: 'pretty',
           }}
-        >
-          {t.newsletter.headline}
-        </h2>
-        <p
+        />
+        <Reveal
+          as="p"
+          delay={200}
           style={{
             fontFamily: 'var(--font-display)',
             fontStyle: 'italic',
@@ -50,10 +53,10 @@ export default function Newsletter() {
           }}
         >
           {t.newsletter.quiet}
-        </p>
-      </Reveal>
+        </Reveal>
+      </div>
 
-      <Reveal style={{ border: '1px solid var(--line-on-chocolate)', padding: 40, fontFamily: 'var(--font-body)' }}>
+      <Reveal data-capture-card="1" style={{ border: '1px solid var(--line-on-chocolate)', padding: 40, fontFamily: 'var(--font-body)' }}>
         <p style={{ fontSize: 11, fontWeight: 500, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--camel)', margin: '0 0 16px' }}>
           {t.newsletter.kicker}
         </p>
@@ -73,12 +76,13 @@ export default function Newsletter() {
             }}
             style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'flex-end' }}
           >
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, flex: '1 1 220px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, flex: '1 1 180px', minWidth: 0 }}>
               <label htmlFor="capture-email" style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--ivory)' }}>
                 {t.newsletter.emailLabel}
               </label>
               <input
                 id="capture-email"
+                data-field="1"
                 type="email"
                 required
                 placeholder={t.newsletter.placeholder}
@@ -90,8 +94,10 @@ export default function Newsletter() {
                   color: 'var(--ivory)',
                   background: 'transparent',
                   border: '1px solid var(--line-on-chocolate)',
-                  padding: '12px 16px',
+                  padding: '14px 16px',
                   borderRadius: 0,
+                  minWidth: 0,
+                  width: '100%',
                   transition: 'border-color 200ms var(--ease)',
                 }}
               />
@@ -99,11 +105,14 @@ export default function Newsletter() {
             <button
               type="submit"
               data-btn="1"
+              data-btn-ink="1"
               style={{
+                '--btn-sweep': 'var(--camel)',
+                '--btn-ink': 'var(--ivory)',
                 fontFamily: 'var(--font-body)',
                 fontWeight: 700,
                 fontSize: 13,
-                letterSpacing: '0.08em',
+                letterSpacing: 'var(--tracking-button)',
                 textTransform: 'uppercase',
                 background: 'var(--ivory)',
                 color: 'var(--chocolate)',
