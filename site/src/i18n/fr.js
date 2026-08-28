@@ -55,9 +55,9 @@ export default {
     moiWord: 'Moi-même.',
     moiBody: "Le mot réservé à la proximité, à la version de vous qui apparaît quand vous êtes entièrement à l'aise.",
     linPrefix: '',
-    linSuffix: ', du latin linum — le fil.',
-    linWord: 'Le fil.',
-    linBody: "Né dans le delta du Nil sous forme de lin, porté à travers les civilisations. Aujourd'hui, ce même fil traverse le coton et la soie autant que le lin, choisi par ceux qui ont compris que le raffinement, dans ce qu'il a de plus authentique, naît de la terre.",
+    linSuffix: ', du latin linum.',
+    linWord: 'Le lin.',
+    linBody: "Né dans le delta du Nil, porté à travers les civilisations, choisi par ceux qui ont compris que le raffinement, dans ce qu'il a de plus authentique, naît de la terre.",
     closing: "La personne, et le tissu fait pour elle. Un vêtement qui ne s'annonce pas.",
   },
 

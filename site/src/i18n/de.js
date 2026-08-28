@@ -55,9 +55,9 @@ export default {
     moiWord: 'Ich selbst.',
     moiBody: 'Das Wort, das der Nähe vorbehalten ist, jener Version von Ihnen, die zum Vorschein kommt, wenn Sie ganz bei sich sind.',
     linPrefix: '',
-    linSuffix: ', vom lateinischen linum — der Faden.',
-    linWord: 'Faden.',
-    linBody: 'Geboren im Nildelta als Flachs, getragen über Zivilisationen hinweg. Heute verläuft derselbe Faden ebenso durch Baumwolle und Seide wie durch Leinen, getragen von Menschen, die verstanden, dass Raffinesse, in ihrer beständigsten Form, aus der Erde wächst.',
+    linSuffix: ', vom lateinischen linum.',
+    linWord: 'Leinen.',
+    linBody: 'Geboren im Nildelta, getragen über Zivilisationen hinweg, von Menschen getragen, die verstanden, dass Raffinesse, in ihrer beständigsten Form, aus der Erde wächst.',
     closing: 'Der Mensch, und der Stoff, der für ihn gemacht wurde. Ein Kleidungsstück, das sich nicht ankündigt.',
   },
 

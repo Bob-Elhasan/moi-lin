@@ -14,9 +14,11 @@ import Footer from './components/Footer';
 import StickyMobileCta from './components/StickyMobileCta';
 import StitchSeam from './components/StitchSeam';
 import { useScrollState } from './hooks/useScroll';
+import { useGrainParallax } from './hooks/useGrainParallax';
 
 export default function App() {
   const { condensed, pastGrid, progress } = useScrollState();
+  useGrainParallax();
 
   return (
     <>

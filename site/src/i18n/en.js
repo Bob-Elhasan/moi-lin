@@ -53,9 +53,9 @@ export default {
     moiWord: 'Myself.',
     moiBody: 'The word reserved for closeness, for the version of you that surfaces when you are entirely at ease.',
     linPrefix: '',
-    linSuffix: ', from the Latin linum — thread.',
-    linWord: 'Thread.',
-    linBody: 'Born in the Nile Delta as flax, carried across civilisations. Today that same thread runs through cotton and silk as much as linen, worn by people who understood that refinement, at its most enduring, is grown from the earth.',
+    linSuffix: ', from the Latin linum.',
+    linWord: 'Linen.',
+    linBody: 'Born in the Nile Delta, carried across civilisations, worn by people who understood that refinement, at its most enduring, is grown from the earth.',
     closing: 'The person, and the fabric made for them. A garment that does not announce itself.',
   },
 
