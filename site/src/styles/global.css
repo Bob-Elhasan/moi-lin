@@ -148,6 +148,13 @@ img { max-width: 100%; display: block; }
 }
 [data-lines="in"] .line-inner { transform: none; }
 
+/* Display tracking is set per size, not once for everything: large Bodoni
+   reads loose unless pulled in, and the tighter it is set the more it stays
+   a headline rather than a row of letters. Body copy keeps the default. */
+[data-display-88] { letter-spacing: -0.028em; }
+[data-display-64] { letter-spacing: -0.022em; }
+[data-display-40] { letter-spacing: -0.012em; }
+
 /* ---------------------------------------------------------------------------
    Interaction feedback
 --------------------------------------------------------------------------- */
@@ -178,7 +185,8 @@ img { max-width: 100%; display: block; }
     border-color var(--dur-quick) var(--ease);
   box-shadow: inset 0 0 0 0 var(--btn-sweep, transparent);
 }
-[data-btn]:active { transform: translateY(0) scale(0.985); }
+/* press feedback lands on pointer-down; keep the press itself quicker than the release */
+[data-btn]:active { transform: translateY(0) scale(0.985); transition-duration: 100ms; }
 
 /* hover-only refinements — gated so touch devices don't get a hover state
    stuck "on" after a tap, which reads as a visual bug rather than feedback.
@@ -372,6 +380,13 @@ img { max-width: 100%; display: block; }
 
   /* at 64px tall the artwork is wider than a narrow screen's text column */
   [data-footer-logo] { --logo-h: 48px; }
+}
+
+/* Translucent chrome falls back to a solid surface when the visitor asks for
+   less transparency, so the header never depends on blur to stay legible. */
+@media (prefers-reduced-transparency: reduce) {
+  [data-material="ecru"] { background: var(--ecru) !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+  [data-material="chocolate"] { background: var(--chocolate) !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
 }
 
 /* ---------------------------------------------------------------------------

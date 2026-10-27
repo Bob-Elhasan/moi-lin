@@ -14,6 +14,7 @@ export default function StickyMobileCta({ visible }) {
     <div
       data-mobile-only="1"
       data-sticky-cta="1"
+      data-material="chocolate"
       aria-hidden={!shown}
       // inert keeps the hidden bar out of the tab order entirely — aria-hidden
       // alone would leave a focusable link inside a hidden region
@@ -24,7 +25,9 @@ export default function StickyMobileCta({ visible }) {
         right: 0,
         bottom: 0,
         zIndex: 70,
-        background: 'var(--chocolate)',
+        background: 'rgba(58, 46, 40, 0.9)',
+        backdropFilter: 'blur(16px) saturate(140%)',
+        WebkitBackdropFilter: 'blur(16px) saturate(140%)',
         alignItems: 'center',
         gap: 12,
         padding: '12px 16px',

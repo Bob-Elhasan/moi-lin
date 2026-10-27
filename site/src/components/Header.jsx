@@ -79,12 +79,15 @@ export default function Header({ condensed, progress = 0 }) {
 
       <div
         data-pad="1"
+        data-material="ecru"
         style={{
           position: 'sticky',
           top: 0,
           zIndex: 60,
-          background: 'var(--ecru)',
-          borderBottom: '1px solid var(--line)',
+          background: 'rgba(240, 234, 218, 0.78)',
+          backdropFilter: 'blur(18px) saturate(160%)',
+          WebkitBackdropFilter: 'blur(18px) saturate(160%)',
+          borderBottom: condensed ? '1px solid var(--line)' : '1px solid transparent',
           display: 'grid',
           gridTemplateColumns: '1fr auto 1fr',
           alignItems: 'center',
