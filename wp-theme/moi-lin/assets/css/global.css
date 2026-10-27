@@ -1,0 +1,417 @@
+html, body { margin: 0; padding: 0; background: var(--ecru); }
+html { scroll-behavior: smooth; }
+/* `clip` rather than `hidden`: it forbids sideways panning without turning
+   these into scroll containers, which would break the collection's sticky
+   filter bar. Belt-and-braces behind the containment on [data-carousel]. */
+html, body { overflow-x: clip; }
+#root { overflow-x: clip; }
+*, *::before, *::after { box-sizing: border-box; }
+body { font-family: var(--font-body); animation: page-in 700ms var(--ease) both; }
+body[data-scroll-locked] { overflow: hidden; }
+
+/* Weave grain — one texture for the whole page (not per-section) so it reads
+   consistently across ecru, ivory, and chocolate alike. Two hairline thread
+   directions plus a touch of fractal noise for the irregularity real woven
+   fibre has; mix-blend-mode is what keeps it a grain sitting *in* each
+   surface rather than a grey film laid over the page.
+   It is a backdrop, not a coat of varnish: it drifts at a fraction of scroll
+   speed (--grain-y, see useGrainParallax) so the page reads as moving over a
+   weave that lies behind it, and it sits low in the stacking order (z-index
+   1) so photography (z-index 2, below) paints above it — garments keep their
+   own material instead of inheriting the page's linen. */
+body::after {
+  content: '';
+  position: fixed;
+  /* generous bleed so the parallax drift never walks an edge into view */
+  inset: -480px;
+  z-index: 1;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  opacity: 0.85;
+  transform: translate3d(0, var(--grain-y, 0px), 0);
+  will-change: transform;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.5  0 0 0 0 0.47  0 0 0 0 0.42  0 0 0 1.3 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    repeating-linear-gradient(90deg, rgba(120,108,90,0.75) 0px, rgba(120,108,90,0.75) 1px, transparent 1px, transparent 3px),
+    repeating-linear-gradient(0deg, rgba(120,108,90,0.65) 0px, rgba(120,108,90,0.65) 1px, transparent 1px, transparent 3px);
+  background-size: 140px 140px, 3px 3px, 3px 3px;
+}
+
+/* Photography sits above the grain (see body::after) rather than being
+   blended into it, so garments read as their own material instead of
+   inheriting the page's linen weave. */
+picture { position: relative; z-index: 2; }
+
+@keyframes page-in { from { opacity: 0; } to { opacity: 1; } }
+
+a { color: var(--camel); text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; color: var(--camel); }
+*:focus-visible { outline: 2px solid var(--camel); outline-offset: 3px; border-radius: 1px; }
+
+button, input, select { font: inherit; }
+
+/* form fields carry their border inline; !important is what it takes to let
+   focus repaint it without moving every field's styling into CSS */
+[data-field]:focus-visible { border-color: var(--camel) !important; }
+[data-field]::placeholder { color: var(--ink-muted-on-chocolate); opacity: 1; }
+
+img { max-width: 100%; display: block; }
+
+/* Footer wordmark: height-driven, with the file's transparent side padding
+   cancelled at a fixed ratio of that height so the glyph optically aligns
+   with the text beneath it at any size. */
+[data-footer-logo] {
+  --logo-h: 64px;
+  height: var(--logo-h);
+  width: auto;
+  max-width: none;
+  margin-left: calc(var(--logo-h) * -121 / 375);
+  margin-right: calc(var(--logo-h) * -121 / 375);
+}
+
+/* Keyboard users land here first; visually hidden until focused. */
+[data-skip-link] {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 200;
+  transform: translateY(-200%);
+  background: var(--chocolate);
+  color: var(--ivory);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: var(--tracking-button);
+  text-transform: uppercase;
+  padding: 12px 20px;
+  transition: transform var(--dur-quick) var(--ease-settle);
+}
+[data-skip-link]:focus-visible { transform: translateY(0); }
+
+/* ---------------------------------------------------------------------------
+   Reveal system. Three variants, because one generic fade-up applied to
+   everything is what makes a page read as templated:
+     text  — copy rises a short distance and settles (no scale: scaling text
+             mid-transition softens the glyph edges and looks cheap)
+     image — resolves down out of a slight over-scale, like it is coming to rest
+     line  — a hairline drawn from its left edge, the brand's signature marker
+   Delay comes from --reveal-delay so grouped items can stagger.
+--------------------------------------------------------------------------- */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity var(--dur-slow) var(--ease-settle), transform var(--dur-slow) var(--ease-settle);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+[data-reveal="in"] { opacity: 1; transform: none; }
+
+[data-reveal-variant="image"] { transform: scale(1.035); }
+[data-reveal-variant="image"][data-reveal="in"] { transform: none; }
+
+/* The seam: a running stitch drawn across the join between two sections.
+   Unlike everything above, this one is scrubbed by scroll position rather
+   than played once — the needle advances as the seam rises through the
+   viewport and runs backwards when the visitor scrolls up. --stitch-rest is
+   how much of the run is still unsewn, set per seam by useScrollDraw; the
+   short linear transition only smooths between animation frames, it does not
+   play the animation on its own. */
+[data-stitch-draw] {
+  clip-path: inset(0 var(--stitch-rest, 100%) 0 0);
+  transition: clip-path 90ms linear;
+}
+
+/* The thread: a warp line pulled taut across the start of a section. */
+[data-thread] {
+  display: block;
+  height: 1px;
+  width: 56px;
+  background: var(--camel);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--dur-draw) var(--ease-thread);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+[data-thread="in"] { transform: scaleX(1); }
+
+/* Display headlines reveal a line at a time from behind a mask — the one
+   piece of motion the page spends real time on, reserved for the biggest
+   type. Each line is a block inside an overflow-hidden block. */
+[data-lines] { display: block; }
+/* the mask needs room for descenders and Bodoni's italic overhang, taken
+   back with an equal negative margin so the headline's box is unchanged */
+[data-lines] .line-mask { display: block; overflow: hidden; padding: 0.06em 0.06em 0.14em; margin: -0.06em -0.06em -0.14em; }
+[data-lines] .line-inner {
+  display: block;
+  transform: translateY(110%);
+  transition: transform 820ms var(--ease-settle);
+  transition-delay: var(--line-delay, 0ms);
+}
+[data-lines="in"] .line-inner { transform: none; }
+
+/* Display tracking is set per size, not once for everything: large Bodoni
+   reads loose unless pulled in, and the tighter it is set the more it stays
+   a headline rather than a row of letters. Body copy keeps the default. */
+[data-display-88] { letter-spacing: -0.028em; }
+[data-display-64] { letter-spacing: -0.022em; }
+[data-display-40] { letter-spacing: -0.012em; }
+
+/* ---------------------------------------------------------------------------
+   Interaction feedback
+--------------------------------------------------------------------------- */
+
+/* animated underline sweep — nav links and text links that want more
+   presence than the default underline-thickness change */
+[data-underline] { position: relative; text-decoration: none !important; }
+[data-underline]::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 100%; bottom: -2px;
+  height: 1px;
+  background: currentColor;
+  transition: right 280ms var(--ease-thread);
+}
+[data-underline]:focus-visible::after { right: 0; }
+
+/* Buttons. The lift stays, plus an ink sweep that fills bottom-to-top on
+   hover — an inset box-shadow, so it paints under the label without needing
+   an extra element or a wrapper span around every button's children.
+   Sweep colour comes from --btn-sweep, set per button at the call site. */
+[data-btn] {
+  transition:
+    transform var(--dur-quick) var(--ease-settle),
+    box-shadow var(--dur-mid) var(--ease-thread),
+    background-color var(--dur-quick) var(--ease),
+    color var(--dur-mid) var(--ease),
+    border-color var(--dur-quick) var(--ease);
+  box-shadow: inset 0 0 0 0 var(--btn-sweep, transparent);
+}
+/* press feedback lands on pointer-down; keep the press itself quicker than the release */
+[data-btn]:active { transform: translateY(0) scale(0.985); transition-duration: 100ms; }
+
+/* hover-only refinements — gated so touch devices don't get a hover state
+   stuck "on" after a tap, which reads as a visual bug rather than feedback.
+   The ink colour only changes on buttons that opt in with data-btn-ink, so a
+   button that sets no sweep keeps whatever colour its own style gave it. */
+@media (hover: hover) and (pointer: fine) {
+  [data-underline]:hover::after { right: 0; }
+  [data-btn]:hover {
+    transform: translateY(-2px);
+    box-shadow: inset 0 -140px 0 0 var(--btn-sweep, transparent);
+  }
+  [data-btn][data-btn-ink]:hover { color: var(--btn-ink); }
+}
+[data-btn]:focus-visible { box-shadow: inset 0 -140px 0 0 var(--btn-sweep, transparent); }
+[data-btn][data-btn-ink]:focus-visible { color: var(--btn-ink); }
+
+/* image layers used for hover-zoom (product cards, category tiles). Gated to
+   devices that actually have hover, so touch doesn't get a "stuck" zoomed
+   state after a tap (iOS/Android apply :hover on tap and hold it). */
+[data-zoom-layer] { transition: transform 600ms var(--ease-settle); }
+@media (hover: hover) and (pointer: fine) {
+  [data-zoom-parent]:hover [data-zoom-layer],
+  [data-zoom-parent]:focus-visible [data-zoom-layer] { transform: scale(1.045); }
+  [data-card] { transition: transform 250ms var(--ease-settle); }
+  [data-card]:hover { transform: translateY(-4px); }
+}
+
+/* grid items sized by an image must not let the image's intrinsic size push
+   the track wider than its fr share — the classic CSS Grid overflow trap */
+[data-cols3] > *, [data-cols4] > * { min-width: 0; }
+
+/* subtle parallax drift on story imagery — position set via JS as the
+   section scrolls, disabled entirely under reduced motion below */
+[data-parallax] { transition: background-position 100ms linear; will-change: background-position; }
+
+/* one-time staggered entrance for above-the-fold hero copy (mount, not scroll) */
+@keyframes hero-rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+[data-hero-in] { opacity: 0; animation: hero-rise var(--dur-slow) var(--ease-settle) both; animation-delay: var(--hero-delay, 0ms); }
+@keyframes thread-draw { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+[data-hero-thread] { animation: thread-draw var(--dur-draw) var(--ease-thread) both; animation-delay: var(--hero-delay, 0ms); transform-origin: left center; }
+
+/* ---------------------------------------------------------------------------
+   Carousels — native scroll-snap, no JS. Used on mobile for the product
+   grid, category tiles, and the fabric-detail crops, all of which are dense
+   image rows that read far better as a swipe than a long vertical stack.
+--------------------------------------------------------------------------- */
+[data-carousel] {
+  display: grid;
+  grid-auto-flow: column;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  /* `overflow-x: auto` scrolls these rows but does NOT keep their off-screen
+     columns out of the document's scrollable overflow: the tracks lay out to
+     roughly 1200px, the <html> box inherits that width, and mobile browsers
+     hand the visitor a page that pans sideways forever. Paint containment is
+     what actually confines the row to its own box. */
+  contain: paint;
+}
+[data-carousel]::-webkit-scrollbar { display: none; }
+[data-carousel] > * { scroll-snap-align: start; }
+[data-carousel]:focus-visible { outline-offset: 6px; }
+
+/* Swipe affordance: a warp thread whose taut section tracks scroll position.
+   Mobile only — on desktop these rows are plain grids with nothing to swipe. */
+[data-rail] { display: none; }
+[data-rail-track] {
+  position: relative;
+  height: 1px;
+  background: var(--line);
+  overflow: hidden;
+}
+[data-rail-track][data-on-chocolate] { background: var(--line-on-chocolate); }
+[data-rail-thumb] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1px;
+  background: var(--camel);
+  transform-origin: left center;
+  will-change: transform;
+}
+
+/* ---------------------------------------------------------------------------
+   Pillar cards — the mobile presentation of the three values. Rendered only
+   below 900px (Pillars.jsx picks the markup), so these need no media query of
+   their own. Stacking the desktop columns left three blocks whose asymmetric
+   side padding never lined up; as cards they share one left edge, one measure,
+   and open one body at a time.
+--------------------------------------------------------------------------- */
+[data-pillar-cards] { display: flex; flex-direction: column; gap: 12px; }
+[data-pillar-card] { background: var(--ivory); border: 1px solid var(--line); }
+
+[data-pillar-trigger] {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 44px;
+  padding: 18px 20px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+}
+[data-pillar-titles] { display: flex; flex-direction: column; gap: 2px; }
+
+/* a needle-thin plus that loses its upright to become a minus — the hairline
+   vocabulary the thread rules use, not a chevron out of a UI kit */
+[data-pillar-mark] { position: relative; flex-shrink: 0; width: 13px; height: 13px; }
+[data-pillar-mark]::before,
+[data-pillar-mark]::after {
+  content: '';
+  position: absolute;
+  background: var(--camel);
+  transition: transform var(--dur-mid) var(--ease-settle), opacity var(--dur-mid) var(--ease-settle);
+}
+[data-pillar-mark]::before { left: 0; right: 0; top: 6px; height: 1px; }
+[data-pillar-mark]::after { top: 0; bottom: 0; left: 6px; width: 1px; }
+[data-pillar-card][data-open] [data-pillar-mark]::after { transform: scaleY(0); opacity: 0; }
+
+/* 0fr → 1fr expands to exactly the content's height, with no magic max-height
+   to guess at and no clipped last line when the copy runs long */
+[data-pillar-panel] {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--dur-mid) var(--ease-settle);
+}
+[data-pillar-card][data-open] [data-pillar-panel] { grid-template-rows: 1fr; }
+[data-pillar-panel-inner] { overflow: hidden; }
+[data-pillar-panel-inner] > p { padding: 0 20px 20px; }
+
+[data-mobile-only] { display: none; }
+
+/* ---------------------------------------------------------------------------
+   Mobile
+--------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  [data-mobile-only] { display: block; }
+  [data-sticky-cta] { display: flex; }
+  [data-desktop-only] { display: none !important; }
+  [data-split], [data-hero] { grid-template-columns: 1fr !important; }
+  [data-cols3]:not([data-carousel]) { grid-template-columns: 1fr !important; }
+  [data-cols3]:not([data-carousel]) > * { border-right: none !important; }
+  [data-cols4]:not([data-carousel]) { grid-template-columns: repeat(2, 1fr) !important; }
+  [data-pad] { padding-left: 24px !important; padding-right: 24px !important; }
+  [data-story] { padding-top: 88px !important; padding-bottom: 88px !important; }
+  [data-hero-copy] { padding: 56px 24px 64px !important; }
+  [data-hero-image] { aspect-ratio: 4 / 5 !important; min-height: 0 !important; }
+  [data-display-88] { font-size: 38px !important; line-height: 1.12 !important; }
+  [data-display-64] { font-size: 34px !important; line-height: 1.14 !important; }
+  [data-display-40] { font-size: 27px !important; line-height: 1.16 !important; }
+
+  /* Section heading rows (heading + "view all") stack rather than letting the
+     link fall off the right edge on a narrow screen. */
+  [data-section-head] { flex-direction: column; align-items: flex-start !important; gap: 12px !important; }
+
+  /* The proof bar's cells are equal-width on desktop; at three cells a
+     wrapping flex row leaves an orphan, so on mobile they become full-width
+     rows separated by hairlines — reads as a specification list. */
+  [data-proof-row] { flex-direction: column; }
+  [data-proof-cell] {
+    flex: 1 1 auto !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--line);
+    padding: 18px 0 !important;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  [data-proof-cell]:last-child { border-bottom: none; }
+  [data-proof-cell-choc] { border-bottom-color: var(--line-on-chocolate); }
+  [data-proof-detail] { text-align: right; flex-shrink: 0; max-width: 55%; }
+
+  /* the components set an explicit desktop grid-template-columns inline;
+     it must be cleared for grid-auto-columns to take over on mobile */
+  [data-carousel] { grid-template-columns: none !important; gap: 16px; padding-bottom: 4px; grid-auto-columns: 82%; }
+  [data-carousel="tight"] { grid-auto-columns: 68%; gap: 12px; }
+  [data-rail] { display: block; }
+
+  /* Comfortable thumb targets everywhere something is tappable. */
+  [data-tap] { min-height: 44px; display: inline-flex; align-items: center; }
+
+  /* 40px of card padding plus the field's own minimum is wider than a 320px
+     screen can hold; the grid track then stretches past the section padding */
+  [data-capture-card] { padding: 24px !important; }
+
+  /* at 64px tall the artwork is wider than a narrow screen's text column */
+  [data-footer-logo] { --logo-h: 48px; }
+}
+
+/* Translucent chrome falls back to a solid surface when the visitor asks for
+   less transparency, so the header never depends on blur to stay legible. */
+@media (prefers-reduced-transparency: reduce) {
+  [data-material="ecru"] { background: var(--ecru) !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+  [data-material="chocolate"] { background: var(--chocolate) !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+}
+
+/* ---------------------------------------------------------------------------
+   Reduced motion — every animated property above is neutralised here, not
+   just the obvious ones. Interaction feedback that carries meaning (colour,
+   underline presence) is kept; movement is removed.
+--------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  body { animation: none; }
+  [data-reveal] { opacity: 1; transform: none !important; transition: none; }
+  [data-thread] { transform: scaleX(1); transition: none; }
+  [data-stitch-draw] { clip-path: none; transition: none; }
+  [data-pillar-panel] { transition: none; }
+  [data-pillar-mark]::before, [data-pillar-mark]::after { transition: none; }
+  body::after { transform: none; will-change: auto; }
+  [data-lines] .line-inner { transform: none; transition: none; }
+  [data-underline]::after { transition: none; }
+  [data-btn] { transition: background-color var(--dur-quick) var(--ease), color var(--dur-quick) var(--ease); box-shadow: none; }
+  [data-btn]:hover, [data-btn]:focus-visible, [data-btn]:active { transform: none; box-shadow: none; }
+  [data-zoom-parent]:hover [data-zoom-layer] { transform: none; }
+  [data-card]:hover { transform: none; }
+  [data-parallax] { background-position: center !important; }
+  [data-hero-in] { animation: none; opacity: 1; }
+  [data-hero-thread] { animation: none; transform: scaleX(1); }
+  [data-skip-link] { transition: none; }
+  [data-rail-thumb] { transition: none; }
+}

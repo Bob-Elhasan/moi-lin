@@ -1,0 +1,160 @@
+{
+  "assets/images/commitment-crop-1": {
+    "widths": [
+      480,
+      900,
+      1400,
+      1800
+    ],
+    "aspect": 1
+  },
+  "assets/images/commitment-crop-2": {
+    "widths": [
+      480,
+      900,
+      1400
+    ],
+    "aspect": 1
+  },
+  "assets/images/commitment-crop-3": {
+    "widths": [
+      480,
+      900,
+      1400,
+      1800
+    ],
+    "aspect": 1.3602
+  },
+  "assets/images/commitment-main": {
+    "widths": [
+      480,
+      900,
+      1045
+    ],
+    "aspect": 0.7464
+  },
+  "assets/images/hero": {
+    "widths": [
+      480,
+      900,
+      1400,
+      1493
+    ],
+    "aspect": 0.7465
+  },
+  "assets/images/horizon": {
+    "widths": [
+      480,
+      900,
+      1400
+    ],
+    "aspect": 1.3605
+  },
+  "assets/images/instinct": {
+    "widths": [
+      480,
+      900,
+      1045
+    ],
+    "aspect": 0.7464
+  },
+  "assets/images/products/dusty-blue-detail": {
+    "widths": [
+      480,
+      900,
+      1400,
+      1800
+    ],
+    "aspect": 1.3605
+  },
+  "assets/images/products/dusty-blue-front": {
+    "widths": [
+      480,
+      900,
+      1400,
+      1493
+    ],
+    "aspect": 0.7465
+  },
+  "assets/images/products/essential-ivory-detail": {
+    "widths": [
+      480,
+      900,
+      1400,
+      1800
+    ],
+    "aspect": 1.3605
+  },
+  "assets/images/products/essential-ivory-front": {
+    "widths": [
+      480,
+      900,
+      1400,
+      1800
+    ],
+    "aspect": 1.3605
+  },
+  "assets/images/products/relaxed-ivory-detail": {
+    "widths": [
+      480,
+      900,
+      1400,
+      1493
+    ],
+    "aspect": 0.7465
+  },
+  "assets/images/products/relaxed-ivory-front": {
+    "widths": [
+      480,
+      900,
+      1400,
+      1493
+    ],
+    "aspect": 0.7465
+  },
+  "assets/images/products/soft-camel-detail": {
+    "widths": [
+      480,
+      900,
+      1400,
+      1800
+    ],
+    "aspect": 1.3605
+  },
+  "assets/images/products/soft-camel-front": {
+    "widths": [
+      480,
+      900,
+      1400,
+      1493
+    ],
+    "aspect": 0.7465
+  },
+  "assets/images/tiles/ivory-edit": {
+    "widths": [
+      480,
+      900,
+      1400,
+      1493
+    ],
+    "aspect": 0.7465
+  },
+  "assets/images/tiles/quiet-blue": {
+    "widths": [
+      480,
+      900,
+      1400,
+      1493
+    ],
+    "aspect": 0.7465
+  },
+  "assets/images/tiles/warm-neutrals": {
+    "widths": [
+      480,
+      900,
+      1400,
+      1493
+    ],
+    "aspect": 0.7465
+  }
+}

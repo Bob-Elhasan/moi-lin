@@ -1,0 +1,238 @@
+/*
+ * MOi & LiN theme: the component classes the templates use, plus the
+ * no-JavaScript fallbacks. Everything else comes from tokens.css and global.css,
+ * which are carried over unchanged from the React site (except where noted).
+ */
+
+/* The hidden attribute must win over the inline display values the templates
+   set, otherwise closed details panels and colour frames would stay on screen. */
+[hidden] { display: none !important; }
+
+/* With JavaScript, the reveal and thread elements start hidden and are shown
+   by IntersectionObserver. Without it, everything stays visible. */
+html:not(.js) [data-reveal],
+html:not(.js) [data-lines] .line-inner { opacity: 1; transform: none; }
+html:not(.js) [data-thread] { transform: scaleX(1); }
+html:not(.js) [data-stitch-draw] { clip-path: none; }
+
+/* Parallax and cover images */
+.moi-parallax { position: relative; overflow: hidden; }
+.moi-parallax__img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.1); transform-origin: center; display: block; }
+.moi-parallax__img--contain { object-fit: contain; }
+.moi-cover { width: 100%; height: 100%; object-fit: cover; display: block; }
+.moi-cover--top { object-position: top center; }
+
+/* Eyebrow: thread plus label, the section opener */
+.moi-eyebrow { display: flex; align-items: center; gap: 16px; margin: 0 0 24px; }
+.moi-eyebrow__text {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--camel);
+  margin: 0;
+}
+
+/* Logo glyphs set inline in the name section */
+.moi-glyph { height: 0.85em; width: auto; display: inline-block; vertical-align: baseline; transform: translateY(0.1em); }
+
+/* Display tracking, size by size (matches the React site's global.css) */
+[data-display-88] { letter-spacing: -0.028em; }
+[data-display-64] { letter-spacing: -0.022em; }
+[data-display-40] { letter-spacing: -0.012em; }
+
+/* Header: translucent sticky material, hairline only once condensed */
+.moi-header {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: rgba(240, 234, 218, 0.78);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(160%);
+  border-bottom: 1px solid transparent;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 20px 80px;
+  font-family: var(--font-body);
+  transition: padding var(--dur-mid) var(--ease-settle), border-color var(--dur-mid) var(--ease);
+}
+.moi-header.is-condensed { padding-top: 10px; padding-bottom: 10px; border-bottom-color: var(--line); }
+.moi-header.is-condensed .moi-header__logo img { height: 32px; }
+.moi-header__logo { justify-self: center; text-decoration: none; transition: transform var(--dur-quick) var(--ease-settle); }
+.moi-header__logo:hover { transform: scale(1.04); }
+.moi-header__logo img { height: 40px; width: auto; transition: height var(--dur-mid) var(--ease-settle); }
+.moi-header__actions { display: flex; gap: 24px; align-items: center; justify-self: end; }
+.moi-header__menu {
+  justify-self: start;
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--chocolate);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  padding: 12px 16px;
+  min-height: 44px;
+  cursor: pointer;
+}
+.moi-header__progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 1px;
+  background: var(--camel);
+  transform-origin: left center;
+  transform: scaleX(0);
+  opacity: 0;
+  transition: opacity var(--dur-mid) var(--ease);
+}
+.moi-btn-reset { background: none; border: none; padding: 0; font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--chocolate); cursor: pointer; }
+
+/* Mobile menu panel */
+.moi-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  background: var(--ecru);
+  padding: 24px 24px 32px;
+  font-family: var(--font-body);
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition: opacity var(--dur-mid) var(--ease-settle), transform var(--dur-mid) var(--ease-settle);
+}
+.moi-menu.is-open { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.moi-menu__close {
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--chocolate);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  padding: 12px 16px;
+  min-height: 44px;
+  cursor: pointer;
+}
+.moi-menu__link {
+  display: block;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-display);
+  font-size: 32px;
+  line-height: 1.1;
+  color: var(--chocolate);
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 420ms var(--ease-settle), transform 420ms var(--ease-settle);
+  transition-delay: calc(80ms + var(--i, 0) * 70ms);
+}
+.moi-menu.is-open .moi-menu__link { opacity: 1; transform: translateY(0); }
+
+/* Collection sort bar, sticks below the header while the grid is in view */
+.moi-collection-bar {
+  position: sticky;
+  top: 61px;
+  z-index: 40;
+  background: var(--ivory);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 12px 80px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 24px;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-body);
+}
+
+/* Product card media: colour-specific, with a hover crop where one exists */
+.moi-card__hover { opacity: 0; transition: opacity 400ms var(--ease); }
+@media (hover: hover) and (pointer: fine) {
+  .moi-card__media:hover .moi-card__hover { opacity: 1; }
+}
+
+/* Pillars: columns on desktop, cards below 900px (global.css handles the data-* switching) */
+.moi-pillars__cards { display: none; flex-direction: column; gap: 12px; }
+@media (max-width: 900px) {
+  .moi-pillars__cards { display: flex; }
+}
+
+/* Footer */
+.moi-footer { background: var(--chocolate); color: var(--ivory); font-family: var(--font-body); padding: 96px 80px 40px; }
+
+/* Mobile sticky shop bar */
+.moi-sticky-cta {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 70;
+  background: rgba(58, 46, 40, 0.9);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(16px) saturate(140%);
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  font-family: var(--font-body);
+  transform: translateY(100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 320ms var(--ease), opacity 320ms var(--ease);
+}
+.moi-sticky-cta.is-shown { transform: translateY(0); opacity: 1; pointer-events: auto; }
+.moi-sticky-cta__shop {
+  flex: 1;
+  text-align: center;
+  text-decoration: none;
+  background: var(--ivory);
+  color: var(--chocolate);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: var(--tracking-button);
+  text-transform: uppercase;
+  padding: 15px 16px;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.moi-sticky-cta__dismiss {
+  background: none;
+  border: 1px solid var(--line-on-chocolate);
+  color: var(--ivory);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: var(--tracking-button);
+  text-transform: uppercase;
+  padding: 13px 16px;
+  min-height: 48px;
+  cursor: pointer;
+}
+
+/* Translucent surfaces fall back to solid when the visitor asks for less transparency */
+@media (prefers-reduced-transparency: reduce) {
+  .moi-header { background: var(--ecru); -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .moi-sticky-cta { background: var(--chocolate); -webkit-backdrop-filter: none; backdrop-filter: none; }
+}
+
+/* Under 900px the page is one column: the header menu and CTA take over from the desktop nav */
+@media (max-width: 900px) {
+  .moi-header { padding-left: 24px; padding-right: 24px; }
+  .moi-header__actions { gap: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .moi-menu, .moi-menu__link, .moi-sticky-cta, .moi-header, .moi-header__progress, .moi-card__hover { transition: none; }
+  .moi-menu__link { transform: none; }
+}

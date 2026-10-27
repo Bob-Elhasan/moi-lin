@@ -1,0 +1,67 @@
+/* Ported from the MOi & LiN design system (_ds/tokens/*.css) */
+
+@font-face{font-family:'Bodoni Moda';src:url('../fonts/BodoniModa-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Bodoni Moda';src:url('../fonts/BodoniModa-Italic.ttf') format('truetype');font-weight:400;font-style:italic;font-display:swap}
+@font-face{font-family:'Bodoni Moda';src:url('../fonts/BodoniModa-Medium.ttf') format('truetype');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'Bodoni Moda';src:url('../fonts/BodoniModa-MediumItalic.ttf') format('truetype');font-weight:500;font-style:italic;font-display:swap}
+@font-face{font-family:'Bodoni Moda';src:url('../fonts/BodoniModa-SemiBold.ttf') format('truetype');font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:'Bodoni Moda';src:url('../fonts/BodoniModa-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Manrope';src:url('../fonts/Manrope-Light.ttf') format('truetype');font-weight:300;font-style:normal;font-display:swap}
+@font-face{font-family:'Manrope';src:url('../fonts/Manrope-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:'Manrope';src:url('../fonts/Manrope-Medium.ttf') format('truetype');font-weight:500;font-style:normal;font-display:swap}
+@font-face{font-family:'Manrope';src:url('../fonts/Manrope-SemiBold.ttf') format('truetype');font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:'Manrope';src:url('../fonts/Manrope-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Manrope';src:url('../fonts/Manrope-ExtraBold.ttf') format('truetype');font-weight:800;font-style:normal;font-display:swap}
+
+:root{
+  /* colors */
+  --ecru:#F0EADA;
+  --chocolate:#3A2E28;
+  --chocolate-hover:#2B2119;
+  --camel:#B08D5F;
+  --dusty-blue:#94A7B4;
+  --ivory:#FFFFFF;
+  --line:#DDD4C2;
+  --line-on-chocolate:#4E4139;
+  --ink-muted:#6F6459;
+  --ink-muted-on-chocolate:#B7AA9C;
+  --surface-primary:var(--ecru);
+  --surface-inverse:var(--chocolate);
+  --surface-card:var(--ivory);
+  --text-body:var(--chocolate);
+  --text-inverse:var(--ivory);
+  --text-accent:var(--camel);
+  --text-muted:var(--ink-muted);
+  --border-default:var(--line);
+  --focus-ring:rgba(176,141,95,0.35);
+
+  /* type */
+  --font-display:'Bodoni Moda', 'Times New Roman', serif;
+  --font-body:'Manrope', -apple-system, sans-serif;
+  --text-11:11px;--text-13:13px;--text-15:15px;--text-17:17px;--text-21:21px;--text-28:28px;--text-40:40px;--text-64:64px;--text-88:88px;
+  --leading-display:1.1;
+  --leading-body:1.6;
+  --tracking-button:0.08em;
+  --tracking-label:0.14em;
+  --measure-body:68ch;
+
+  /* spacing */
+  --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-5:24px;--space-6:40px;--space-7:64px;--space-8:96px;--space-9:144px;
+  --section-padding-story:144px;
+  --section-padding-utility:96px;
+  --grid-max-width:1280px;
+  --grid-margin-desktop:80px;
+  --grid-margin-mobile:20px;
+  --grid-gutter:24px;
+  --radius:0px;
+
+  --ease:cubic-bezier(0.4,0,0.2,1);
+  /* Motion vocabulary — "warp & weft". Everything decelerates hard and comes
+     to rest rather than bouncing: cloth settles, it does not spring. */
+  --ease-settle:cubic-bezier(0.16,0.84,0.34,1);  /* things arriving into place */
+  --ease-thread:cubic-bezier(0.22,1,0.36,1);     /* a line being drawn/pulled */
+  --dur-quick:200ms;
+  --dur-mid:420ms;
+  --dur-slow:720ms;
+  --dur-draw:900ms;
+}
